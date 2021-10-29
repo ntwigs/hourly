@@ -1,7 +1,7 @@
 const sizes = [16, 24]
-const spacing = [0, 8, 16, 24]
+const spacing = [0, 4, 8, 16, 24]
 const colors = {
-  black: ['#333333', '#CFCFCF', '#FFFFFF'],
+  black: ['#333333', '#CFCFCF', '#E8E8E8', '#FFFFFF'],
   red: ['#FFAAA7'],
   yellow: ['#FFD3B4'],
   green: ['#D5ECC2'],
