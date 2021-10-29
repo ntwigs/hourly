@@ -1,5 +1,6 @@
 import { ReactText } from 'react'
 import { Section } from '../../components/section'
+import { Spacer } from '../../components/spacer'
 import { Title } from '../../components/typography'
 
 interface Props {
@@ -9,7 +10,9 @@ interface Props {
 export const HeaderBlock = ({ title }: Props): JSX.Element => {
   return (
     <Section>
-      <Title>{title}</Title>
+      <Spacer size={4}>
+        <Title>{title}</Title>
+      </Spacer>
     </Section>
   )
 }
