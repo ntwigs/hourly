@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-export const Layout = styled.main({
+export const Layout = styled.main(({ theme }) => ({
   width: 235,
-  height: 380,
-  padding: 16,
-})
+  padding: theme.spacing[2],
+}))
