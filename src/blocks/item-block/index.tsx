@@ -1,25 +1,29 @@
-import { Section } from '../../components/section'
 import { useState } from 'react'
 import { Item } from '../../components/item'
+import { Grid } from '../../components/grid'
+import type { Item as _Item } from '../../data/items'
+import { useColor } from '../../hooks/use-color'
 
 interface Props {
-  items: string[]
+  items: _Item[]
 }
 
 export const ItemBlock = ({ items }: Props): JSX.Element => {
   const [selected, setValue] = useState<string>()
+  const getColor = useColor()
 
   return (
-    <Section>
-      {items.map((item) => (
+    <Grid>
+      {items.map(({ name, image }, index) => (
         <Item
-          key="item"
-          isSelected={selected === item}
-          onClick={() => setValue(item)}
+          key={name}
+          isSelected={selected === name}
+          onClick={() => setValue(name)}
+          color={getColor({ color: index % 4 })}
         >
-          {item}
+          <img src={image} alt={name} />
         </Item>
       ))}
-    </Section>
+    </Grid>
   )
 }
