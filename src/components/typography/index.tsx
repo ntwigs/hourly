@@ -1,4 +1,4 @@
-import { ReactText } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 const Typography = styled.h2(({ theme }) => ({
@@ -18,7 +18,7 @@ const InputValueBase = styled(Typography)(({ theme }) => ({
 }))
 
 interface Props {
-  children: ReactText
+  children: ReactNode
 }
 export const Title = ({ children }: Props): JSX.Element => (
   <TitleBase as="h1">{children}</TitleBase>
