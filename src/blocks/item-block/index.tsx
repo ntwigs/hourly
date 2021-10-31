@@ -13,7 +13,7 @@ interface Props {
 const parentVariants: Variants = {
   mount: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 }
@@ -30,7 +30,7 @@ const itemVariants: Variants = {
     rotate: 180,
   },
   hover: {
-    scale: 1.2,
+    scale: 1.1,
   },
 }
 
@@ -56,17 +56,17 @@ export const ItemBlock = ({
   return (
     <Grid variants={parentVariants}>
       {items.map(({ name, image, price }, index) => (
-        <Item
-          whileHover="hover"
-          as={motion.div}
-          key={name}
-          isSelected={selection.name === name}
-          onClick={selectItem({ name, image, price })}
-          color={getColor({ color: getColorIndex({ index }) })}
-          variants={itemVariants}
-        >
-          <img src={image} alt={name} />
-        </Item>
+        <motion.div key={name} variants={itemVariants}>
+          <motion.div variants={itemVariants} whileHover="hover">
+            <Item
+              isSelected={selection.name === name}
+              onClick={selectItem({ name, image, price })}
+              color={getColor({ color: getColorIndex({ index }) })}
+            >
+              <img src={image} alt={name} />
+            </Item>
+          </motion.div>
+        </motion.div>
       ))}
     </Grid>
   )
