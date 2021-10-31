@@ -4,6 +4,8 @@ import { Input } from '../../components/input'
 import { ChangeEvent, RefObject, useEffect, useRef, useState } from 'react'
 import { Spacer } from '../../components/spacer'
 import styled from 'styled-components'
+import { AnimatedText } from '../../components/animated-text'
+import { motion, Variants } from 'framer-motion'
 
 const Span = styled.span(({ theme }) => ({
   fontSize: theme.sizes[0],
@@ -54,6 +56,14 @@ interface Props {
   max?: number
 }
 
+const containerVariant: Variants = {
+  mount: {
+    transition: {
+      staggerChildren: 0.02,
+    },
+  },
+}
+
 export const InputBlock = ({
   title,
   defaultValue,
@@ -72,8 +82,10 @@ export const InputBlock = ({
   return (
     <Section>
       <Spacer size={3}>
-        <Spacer size={2}>
-          <InputTitle>{title}</InputTitle>
+        <Spacer as={motion.div} variants={containerVariant} size={2}>
+          <InputTitle>
+            <AnimatedText title={title} />
+          </InputTitle>
         </Spacer>
         <InputContainer>
           <Input onChange={onChange} value={value} maxLength={max} />
