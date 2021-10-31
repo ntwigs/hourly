@@ -44,7 +44,7 @@ const useWidth = (value?: string): [RefObject<HTMLElement>, number] => {
   return [ref, width]
 }
 
-const InputContainer = styled.div({
+const InputContainer = styled(motion.div)({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -64,13 +64,24 @@ const containerVariant: Variants = {
   },
 }
 
+const inputVariants = {
+  mount: {
+    opacity: 1,
+    y: 0,
+  },
+  unmount: {
+    opacity: 0,
+    y: 25,
+  },
+}
+
 export const InputBlock = ({
   title,
   defaultValue,
   max,
 }: Props): JSX.Element => {
-  const [value, setValue] = useState<string>()
-  const [ref, width] = useWidth(value ?? '')
+  const [value, setValue] = useState<string>(`${defaultValue}`)
+  const [ref, width] = useWidth(value)
 
   useEffect(() => {
     setValue(`${defaultValue}`)
@@ -78,6 +89,8 @@ export const InputBlock = ({
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
+
+  const shouldRenderSuffix = value.length > 0 && width > 0
 
   return (
     <Section>
@@ -87,9 +100,9 @@ export const InputBlock = ({
             <AnimatedText title={title} />
           </InputTitle>
         </Spacer>
-        <InputContainer>
+        <InputContainer variants={inputVariants}>
           <Input onChange={onChange} value={value} maxLength={max} />
-          {(value ?? 0) > 0 && <Symbol left={width}>$</Symbol>}
+          {shouldRenderSuffix && <Symbol left={width}>$</Symbol>}
         </InputContainer>
         <Span ref={ref}>{value}</Span>
       </Spacer>
