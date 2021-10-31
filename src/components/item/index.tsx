@@ -7,13 +7,17 @@ interface ContainerProps {
 
 export const Item = styled.button<ContainerProps>(
   ({ theme, isSelected, color }) => ({
-    background: color,
+    background: isSelected ? color : theme.colors.black[2],
     borderRadius: theme.sizes[0],
-    filter: isSelected ? 'saturate(1)' : 'saturate(0)',
     border: 'none',
     width: '100%',
-    aspectRatio: '1 / 1',
+    aspectRatio: '1',
     cursor: 'pointer',
     padding: theme.spacing[1],
+    transition: 'background 250ms',
+
+    '&:hover': {
+      background: color,
+    },
   })
 )
