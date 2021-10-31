@@ -31,24 +31,33 @@ const slide: Variants = {
   },
   unmount: {
     opacity: 0,
-    y: 10,
+    y: 5,
   },
 }
 
-interface Props {
+interface Animation {
+  animation: 'rotate' | 'slide'
+}
+
+interface Props extends Partial<Animation> {
   title: string
 }
 
-export const AnimatedText = ({ title }: Props) => {
+const animations: Record<Animation['animation'], Variants> = {
+  rotate,
+  slide,
+}
+
+export const AnimatedText = ({ title, animation = 'rotate' }: Props) => {
   const letters = title.split('')
 
   return (
     <>
       {letters.map((letter, index) => (
         <InlineSpan
-          key={`${letter}-${index}`}
+          key={`${title}-${letter}-${index}`}
           isBlank={letter === ' '}
-          variants={slide}
+          variants={animations[animation]}
         >
           {letter}
         </InlineSpan>
