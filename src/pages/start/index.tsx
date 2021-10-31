@@ -1,3 +1,4 @@
+import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import { HeaderBlock } from '../../blocks/header-block'
 import { InputBlock } from '../../blocks/input-block'
@@ -8,11 +9,24 @@ import { Item, items } from '../../data/items'
 
 const DEFAULT_HOURLY_RATE = 100
 
+const variants: Variants = {
+  mount: {
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+}
+
 export const Start = (): JSX.Element => {
   const [selection, setSelection] = useState<Item>(items[0])
 
   return (
-    <Layout>
+    <Layout
+      animate="mount"
+      initial="unmount"
+      variants={variants}
+      as={motion.main}
+    >
       <HeaderBlock title="Hourly" />
       <InputBlock
         max={6}
