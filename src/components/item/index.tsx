@@ -9,7 +9,7 @@ export const Item = styled.button<ContainerProps>(
   ({ theme, isSelected, color }) => ({
     background: color,
     borderRadius: theme.sizes[0],
-    filter: isSelected ? 'saturate(1)' : 'saturate(0.4)',
+    filter: isSelected ? 'saturate(1)' : 'saturate(0)',
     border: 'none',
     width: '100%',
     aspectRatio: '1 / 1',
