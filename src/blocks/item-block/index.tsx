@@ -39,13 +39,10 @@ interface ColorIndex {
 }
 
 const getColorIndex = ({ index }: ColorIndex): number => {
-  const MAX = 4
-  const a = index % MAX
-  const b = index % 8
-
-  console.log(a, b)
-
-  return index % 4
+  const MAX = 8
+  const HALF = MAX / 2
+  const column = index % MAX
+  return column >= HALF ? HALF - 1 - (column % HALF) : column
 }
 
 export const ItemBlock = ({
