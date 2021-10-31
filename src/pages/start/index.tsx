@@ -7,7 +7,7 @@ import { Layout } from '../../components/layout'
 import { Spacer } from '../../components/spacer'
 import { Item, items } from '../../data/items'
 
-const DEFAULT_HOURLY_RATE = 100
+const DEFAULT_HOURLY_RATE = '100'
 
 const variants: Variants = {
   mount: {
@@ -35,7 +35,7 @@ export const Start = (): JSX.Element => {
       />
       <InputBlock
         title={`Price per ${selection.name}`}
-        defaultValue={selection.price}
+        defaultValue={`${selection.price}`}
         max={6}
       />
       <Spacer size={4} />

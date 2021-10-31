@@ -52,7 +52,7 @@ const InputContainer = styled(motion.div)({
 
 interface Props {
   title: string
-  defaultValue: number
+  defaultValue: string
   max?: number
 }
 
@@ -84,7 +84,10 @@ export const InputBlock = ({
   const [ref, width] = useWidth(value)
 
   useEffect(() => {
-    setValue(`${defaultValue}`)
+    if (value !== defaultValue) {
+      setValue(`${defaultValue}`)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValue])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -97,7 +100,7 @@ export const InputBlock = ({
       <Spacer size={3}>
         <Spacer as={motion.div} variants={containerVariant} size={2}>
           <InputTitle>
-            <AnimatedText title={title} />
+            <AnimatedText title={title} animation="slide" />
           </InputTitle>
         </Spacer>
         <InputContainer variants={inputVariants}>
