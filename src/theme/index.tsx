@@ -9,8 +9,8 @@ const colors = {
 }
 const weight = [400, 700, 900]
 const fonts = {
-  primary: 'sans-serif, serif',
-  secondary: 'serif',
+  primary: 'Nunito, serif',
+  secondary: 'Nunito',
 }
 
 export const theme = {
