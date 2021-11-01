@@ -5,6 +5,7 @@ import { InputBlock } from '../../blocks/input-block'
 import { ItemBlock } from '../../blocks/item-block'
 import { Layout } from '../../components/layout'
 import { Spacer } from '../../components/spacer'
+import { Circle } from '../../components/circle'
 import { Item, items } from '../../data/items'
 
 const DEFAULT_HOURLY_RATE = '100'
@@ -13,8 +14,20 @@ const variants: Variants = {
   mount: {
     transition: {
       staggerChildren: 0.25,
+      delayChildren: 0.5
     },
   },
+}
+
+const circleVariants = {
+  mount: {
+    opacity: 1,
+    scale: 1
+  },
+  unmount: {
+    opacity: 0,
+    scale: 0
+  }
 }
 
 export const Start = (): JSX.Element => {
@@ -27,6 +40,7 @@ export const Start = (): JSX.Element => {
       variants={variants}
       as={motion.main}
     >
+      <Circle variants={circleVariants} />
       <HeaderBlock title="Hourly" />
       <InputBlock
         max={6}
