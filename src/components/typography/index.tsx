@@ -20,12 +20,12 @@ const InputValueBase = styled(Typography)(({ theme }) => ({
 interface Props {
   children: ReactNode
 }
-export const Title = ({ children }: Props): JSX.Element => (
-  <TitleBase as="h1">{children}</TitleBase>
+export const Title = ({ children, ...props }: Props): JSX.Element => (
+  <TitleBase as="h1" {...props}>{children}</TitleBase>
 )
-export const InputTitle = ({ children }: Props): JSX.Element => (
-  <InputTitleBase as="p">{children}</InputTitleBase>
+export const InputTitle = ({ children, ...props }: Props): JSX.Element => (
+  <InputTitleBase as="p" {...props}>{children}</InputTitleBase>
 )
-export const InputValue = ({ children }: Props): JSX.Element => (
-  <InputValueBase>{children}</InputValueBase>
+export const InputValue = ({ children, ...props }: Props): JSX.Element => (
+  <InputValueBase {...props}>{children}</InputValueBase>
 )
