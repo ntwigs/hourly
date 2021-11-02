@@ -3,11 +3,16 @@
   "manifest_version": 3,
   "short_name": "Hourly",
   "name": "Hourly",
-  "description": "Convert that old boring money into something fun - like burgers.",
+  "description": "Convert that old boring time into something fun - like burgers.",
   "version": "0.0.1",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "content_scripts": [
+    {
+      "matches": ["https://track.toggl.com/timer"],
+      "js": ["./static/js/content.js", "./static/js/0.chunk.js"],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
   "action": {
     "default_title": "Hourly",
     "default_popup": "index.html"
