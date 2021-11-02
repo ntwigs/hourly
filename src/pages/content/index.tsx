@@ -1,4 +1,5 @@
 import { motion, Variants } from 'framer-motion'
+import { useTheme } from 'styled-components'
 import { Item } from '../../components/item'
 import { Layout } from '../../components/layout'
 import { items } from '../../data/items'
@@ -29,7 +30,11 @@ const itemVariants: Variants = {
 }
 
 export const Content = (): JSX.Element => {
-  const { name, image } = items[0]
+  const theme = useTheme()
+  const { name } = items[0]
+
+  const img = 'beer.5dcf68a7.svg'
+  const image = chrome.runtime.getURL(`/static/media/${img}`)
 
   return (
     <Layout
@@ -40,7 +45,7 @@ export const Content = (): JSX.Element => {
     >
       <motion.div key={name} variants={itemVariants}>
         <motion.div variants={itemVariants} whileHover="hover">
-          <Item isSelected={false} color={'white'}>
+          <Item isSelected={false} color={theme.colors.blue[0]}>
             <img src={image} alt={name} />
           </Item>
         </motion.div>
