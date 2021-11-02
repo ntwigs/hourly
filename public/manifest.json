@@ -5,6 +5,10 @@
   "name": "Hourly",
   "description": "Convert that old boring time into something fun - like burgers.",
   "version": "0.0.1",
+  "web_accessible_resources": [{ 
+    "resources": ["static/media/*.svg"],
+    "matches": ["<all_urls>"]
+  }],
   "content_scripts": [
     {
       "matches": ["https://track.toggl.com/timer"],
