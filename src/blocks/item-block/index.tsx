@@ -1,8 +1,9 @@
 import { Item } from '../../components/item'
 import { Grid } from '../../components/grid'
-import type { Item as _Item } from '../../data/items'
+import { Item as _Item } from '../../data/items'
 import { useColor } from '../../hooks/use-color'
 import { motion, Variants } from 'framer-motion'
+import { Icon } from '../../components/icons'
 
 interface Props {
   items: _Item[]
@@ -55,15 +56,15 @@ export const ItemBlock = ({
 
   return (
     <Grid variants={parentVariants}>
-      {items.map(({ name, image, price }, index) => (
+      {items.map(({ name, price }, index) => (
         <motion.div key={name} variants={itemVariants}>
           <motion.div variants={itemVariants} whileHover="hover">
             <Item
               isSelected={selection.name === name}
-              onClick={selectItem({ name, image, price })}
+              onClick={selectItem({ name, price })}
               color={getColor({ color: getColorIndex({ index }) })}
             >
-              <img src={image} alt={name} />
+              <Icon icon={name} />
             </Item>
           </motion.div>
         </motion.div>
