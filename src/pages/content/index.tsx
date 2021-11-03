@@ -10,7 +10,7 @@ export const Content = (): JSX.Element => {
 
   return (
     <motion.div initial="mount" style={{ width: 48 }} key={name}>
-      <ContentItem isSelected={false} color={theme.colors.blue[0]}>
+      <ContentItem as="div" color={theme.colors.blue[0]}>
         <Icon icon={name} />
       </ContentItem>
     </motion.div>
