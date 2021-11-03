@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 interface ContainerProps {
   isSelected?: boolean
-  color: string
+  color?: string
 }
 
 export const Item = styled.button<ContainerProps>(
@@ -15,9 +15,22 @@ export const Item = styled.button<ContainerProps>(
     cursor: 'pointer',
     padding: theme.spacing[1],
     transition: 'background 250ms',
+    color: theme.colors.black[3],
 
     '&:hover': {
       background: color,
     },
+
+    svg: {
+      fill: 'currentColor',
+    },
   })
 )
+
+export const ContentItem = styled(Item)(({ theme }) => ({
+  background: 'transparent',
+  color: theme.colors.black[0],
+  '&:hover': {
+    background: 'transparent',
+  },
+}))
