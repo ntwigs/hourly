@@ -20,15 +20,12 @@ export const Item = styled.button<ContainerProps>(
     '&:hover': {
       background: color,
     },
-
-    svg: {
-      fill: 'currentColor',
-    },
   })
 )
 
 export const ContentItem = styled(Item)(({ theme }) => ({
   background: 'transparent',
+  cursor: 'auto',
   color: theme.colors.black[0],
   '&:hover': {
     background: 'transparent',
