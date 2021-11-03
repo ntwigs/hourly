@@ -5,6 +5,8 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from '../theme'
 import { GlobalStyle } from '../theme/global-style'
 
+const HOURLY_ROOT = 'hourly-root'
+
 // @ts-ignore
 ;(() => {
   const config = {
@@ -18,24 +20,36 @@ import { GlobalStyle } from '../theme/global-style'
     mutations.forEach((mutation) => {
       if (mutation.type === 'childList') {
         if (targetNode) {
-          const elements = targetNode.querySelector(
-            "*[data-heap-id='timer-page-list']"
+          const billable = targetNode.querySelectorAll('*[title="Billable"]')
+          const nonbillable = targetNode.querySelectorAll(
+            '*[title="Non-billable"]'
           )
 
-          if (elements) {
-            observer.disconnect()
-            const test = elements!.firstElementChild!.firstElementChild
+          const elements = [...Array.from(billable), ...Array.from(nonbillable)]
 
-            ReactDOM.render(
-              <React.StrictMode>
-                <ThemeProvider theme={theme}>
-                  <GlobalStyle />
-                  <Content />
-                </ThemeProvider>
-              </React.StrictMode>,
-              test
-            )
-          }
+          elements.forEach((element) => {
+            if (element) {
+              observer.disconnect()
+              const node = element
+
+              if (node.nextElementSibling?.classList.value !== HOURLY_ROOT) {
+                const root = document.createElement('div')
+                root.className = HOURLY_ROOT
+
+                node.insertAdjacentElement('afterend', root)
+
+                ReactDOM.render(
+                  <React.StrictMode>
+                    <ThemeProvider theme={theme}>
+                      <GlobalStyle />
+                      <Content />
+                    </ThemeProvider>
+                  </React.StrictMode>,
+                  root
+                )
+              }
+            }
+          })
         }
       }
     })
