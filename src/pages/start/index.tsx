@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HeaderBlock } from '../../blocks/header-block'
 import { InputBlock } from '../../blocks/input-block'
 import { ItemBlock } from '../../blocks/item-block'
@@ -14,7 +14,7 @@ const variants: Variants = {
   mount: {
     transition: {
       staggerChildren: 0.25,
-      delayChildren: 0.5
+      delayChildren: 0.5,
     },
   },
 }
@@ -22,16 +22,26 @@ const variants: Variants = {
 const circleVariants = {
   mount: {
     opacity: 1,
-    scale: 1
+    scale: 1,
   },
   unmount: {
     opacity: 0,
-    scale: 0
-  }
+    scale: 0,
+  },
 }
 
 export const Start = (): JSX.Element => {
   const [selection, setSelection] = useState<Item>(items[0])
+
+  useEffect(() => {
+    chrome.tabs.query({}, (tabs) => {
+      tabs.forEach((tab) => {
+        if (tab.id) {
+          chrome.tabs.sendMessage(tab.id, { selection })
+        }
+      })
+    })
+  }, [selection])
 
   return (
     <Layout
