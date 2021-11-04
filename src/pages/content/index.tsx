@@ -3,11 +3,25 @@ import { useTheme } from 'styled-components'
 import { ContentItem } from '../../components/item'
 import { items, Item } from '../../data/items'
 import { Icon } from '../../components/icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export const Content = (): JSX.Element => {
+export const Content = (): JSX.Element | null => {
   const theme = useTheme()
-  const [item, setItem] = useState<Item>(items[0])
+  const [item, setItem] = useState<Item>()
+
+  useEffect(() => {
+    chrome.storage.local.get('selection').then(({ selection: _selection }) => {
+      if (_selection) {
+        setItem(_selection)
+      } else {
+        setItem(items[0])
+      }
+    })
+  }, [])
+
+  if (!item) {
+    return null
+  }
 
   chrome.runtime.onMessage.addListener(({ selection }: { selection: Item }) => {
     if (selection.name !== item.name) {

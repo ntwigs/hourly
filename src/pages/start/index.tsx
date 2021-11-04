@@ -30,8 +30,29 @@ const circleVariants = {
   },
 }
 
-export const Start = (): JSX.Element => {
-  const [selection, setSelection] = useState<Item>(items[0])
+const useSelection = (): [Item | undefined, (item: Item) => void] => {
+  const [selection, setSelection] = useState<Item | undefined>()
+
+  useEffect(() => {
+    chrome.storage.local.get('selection').then(({ selection: _selection }) => {
+      if (_selection) {
+        setSelection(_selection)
+      } else {
+        setSelection(items[0])
+      }
+    })
+  }, [])
+
+  const _setSelection = (selection: Item) => {
+    setSelection(selection)
+    chrome.storage.local.set({ selection })
+  }
+
+  return [selection, _setSelection]
+}
+
+export const Start = (): JSX.Element | null => {
+  const [selection, setSelection] = useSelection()
 
   useEffect(() => {
     chrome.tabs.query({}, (tabs) => {
@@ -42,6 +63,10 @@ export const Start = (): JSX.Element => {
       })
     })
   }, [selection])
+
+  if (!selection) {
+    return null
+  }
 
   return (
     <Layout
