@@ -33,6 +33,10 @@ const HOURLY_ROOT = 'hourly-root'
               const node = element
 
               if (node.nextElementSibling?.classList.value !== HOURLY_ROOT) {
+                const time =
+                  node.nextElementSibling?.querySelector(
+                    '.time-format-utils__duration'
+                  )?.textContent || ''
                 const root = document.createElement('div')
                 root.className = HOURLY_ROOT
 
@@ -42,7 +46,7 @@ const HOURLY_ROOT = 'hourly-root'
                   <React.StrictMode>
                     <ThemeProvider theme={theme}>
                       <GlobalStyle />
-                      <Content />
+                      <Content time={time} />
                     </ThemeProvider>
                   </React.StrictMode>,
                   root
