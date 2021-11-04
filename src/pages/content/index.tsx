@@ -5,7 +5,11 @@ import { items, Item } from '../../data/items'
 import { Icon } from '../../components/icons'
 import { useEffect, useState } from 'react'
 
-export const Content = (): JSX.Element | null => {
+interface Props {
+  time?: string
+}
+
+export const Content = ({ time }: Props): JSX.Element | null => {
   const theme = useTheme()
   const [item, setItem] = useState<Item>()
 
@@ -34,6 +38,7 @@ export const Content = (): JSX.Element | null => {
       <ContentItem as="div" color={theme.colors.blue[0]}>
         <Icon icon={item.name} />
       </ContentItem>
+      {time && <span>{time}</span>}
     </motion.div>
   )
 }
