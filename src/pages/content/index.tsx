@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useTheme } from 'styled-components'
 import { ContentIcon } from '../../components/content-icon'
-import { items, Item } from '../../data/items'
+import { Item } from '../../data/items'
 import { Icon } from '../../components/icons'
 import { useMemo, useEffect, useState } from 'react'
 
