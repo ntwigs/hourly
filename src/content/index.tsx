@@ -29,7 +29,6 @@ const HOURLY_ROOT = 'hourly-root'
 
           elements.forEach((element) => {
             if (element) {
-              observer.disconnect()
               const node = element
 
               if (node.nextElementSibling?.classList.value !== HOURLY_ROOT) {
