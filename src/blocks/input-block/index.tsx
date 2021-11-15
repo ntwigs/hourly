@@ -1,11 +1,12 @@
 import { Section } from '../../components/section'
 import { InputTitle, InputValue } from '../../components/typography'
 import { Input } from '../../components/input'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { Spacer } from '../../components/spacer'
 import styled from 'styled-components'
 import { AnimatedText } from '../../components/animated-text'
 import { motion, Variants } from 'framer-motion'
+import { Item } from '../../data/items'
 
 const Symbol = styled(InputValue)(({ theme }) => ({
   position: 'absolute',
@@ -28,6 +29,7 @@ interface Props {
   defaultValue: string
   store: string
   max?: number
+  item?: Item
 }
 
 const containerVariant: Variants = {
@@ -77,20 +79,37 @@ const useInput = (
 const isNumber = (number: unknown): number is number =>
   typeof +(number as string) === 'number'
 
+const useDidUpdate = (fn: () => void, input: unknown[]): void => {
+  const ref = useRef(false)
+  useEffect(() => {
+    ref.current ? fn() : (ref.current = true)
+  }, input)
+}
+
 export const InputBlock = ({
   title,
   defaultValue,
   max,
   store,
+  item,
 }: Props): JSX.Element => {
   const [value, setValue] = useInput(store, defaultValue)
 
-  useEffect(() => {
-    if (value !== defaultValue) {
-      setValue(`${defaultValue}`)
+  useDidUpdate(() => {
+    if (value !== item?.price) {
+      setValue(`${item?.price}`)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultValue])
+  }, [item])
+
+  useEffect(() => {
+    chrome.tabs.query({}, (tabs) => {
+      tabs.forEach((tab) => {
+        if (tab.id) {
+          chrome.tabs.sendMessage(tab.id, { [store]: value })
+        }
+      })
+    })
+  }, [value])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
