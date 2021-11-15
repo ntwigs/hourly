@@ -83,6 +83,7 @@ export const Start = (): JSX.Element | null => {
         defaultValue={DEFAULT_HOURLY_RATE}
       />
       <InputBlock
+        item={selection}
         store="cost"
         title={`Price per ${selection.name}`}
         defaultValue={`${selection.price}`}
