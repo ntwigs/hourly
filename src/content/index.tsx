@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { Content } from '../pages/content'
 import { ThemeProvider } from 'styled-components'
 import { theme } from '../theme'
-import { GlobalStyle } from '../theme/global-style'
 
 const HOURLY_ROOT = 'hourly-root'
 
