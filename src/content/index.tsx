@@ -44,7 +44,6 @@ const HOURLY_ROOT = 'hourly-root'
                 ReactDOM.render(
                   <React.StrictMode>
                     <ThemeProvider theme={theme}>
-                      <GlobalStyle />
                       <Content time={time} />
                     </ThemeProvider>
                   </React.StrictMode>,
