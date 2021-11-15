@@ -38,7 +38,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
       if (_selection) {
         setSelection(_selection)
       } else {
-        setSelection(items[0])
+        _setSelection(items[0])
       }
     })
   }, [])
@@ -50,7 +50,6 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
 
   return [selection, _setSelection]
 }
-
 export const Start = (): JSX.Element | null => {
   const [selection, setSelection] = useSelection()
 
@@ -78,11 +77,13 @@ export const Start = (): JSX.Element | null => {
       <Circle variants={circleVariants} />
       <HeaderBlock title="Hourly" />
       <InputBlock
+        store="rate"
         max={6}
         title="Rate per hour"
         defaultValue={DEFAULT_HOURLY_RATE}
       />
       <InputBlock
+        store="cost"
         title={`Price per ${selection.name}`}
         defaultValue={`${selection.price}`}
         max={6}
