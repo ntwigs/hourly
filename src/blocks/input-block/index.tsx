@@ -14,7 +14,7 @@ const Symbol = styled(InputValue)(({ theme }) => ({
   left: theme.spacing[1],
   color: theme.colors.black[0],
   paddingLeft: theme.spacing[2],
-  fontFamily: theme.fonts.primary
+  fontFamily: theme.fonts.primary,
 }))
 
 const InputContainer = styled(motion.div)({
@@ -26,6 +26,7 @@ const InputContainer = styled(motion.div)({
 interface Props {
   title: string
   defaultValue: string
+  store: string
   max?: number
 }
 
@@ -48,12 +49,41 @@ const inputVariants = {
   },
 }
 
+const useInput = (
+  store: string,
+  defaultValue: string
+): [string | undefined, (text: string) => void] => {
+  const [input, setInput] = useState<string>()
+
+  const _setInput = (value: string) => {
+    setInput(value)
+    chrome.storage.local.set({ [store]: value })
+  }
+
+  useEffect(() => {
+    chrome.storage.local.get(store).then((_input) => {
+      const storedInput = _input[store]
+      if (storedInput) {
+        setInput(storedInput)
+      } else {
+        _setInput(`${defaultValue}`)
+      }
+    })
+  }, [])
+
+  return [input, _setInput]
+}
+
+const isNumber = (number: unknown): number is number =>
+  typeof +(number as string) === 'number'
+
 export const InputBlock = ({
   title,
   defaultValue,
   max,
+  store,
 }: Props): JSX.Element => {
-  const [value, setValue] = useState<string>(`${defaultValue}`)
+  const [value, setValue] = useInput(store, defaultValue)
 
   useEffect(() => {
     if (value !== defaultValue) {
@@ -65,7 +95,7 @@ export const InputBlock = ({
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
 
-  const isValid = value.length > 0 && typeof +value === 'number'
+  const isValid = isNumber(value)
 
   return (
     <Section>
@@ -76,7 +106,12 @@ export const InputBlock = ({
           </InputTitle>
         </Spacer>
         <InputContainer variants={inputVariants}>
-          <Input onChange={onChange} value={value} maxLength={max} isInvalid={!isValid} />
+          <Input
+            onChange={onChange}
+            value={value}
+            maxLength={max}
+            isInvalid={!isValid}
+          />
           <Symbol>$</Symbol>
         </InputContainer>
       </Spacer>
