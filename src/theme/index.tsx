@@ -1,4 +1,4 @@
-const sizes = [16, 24]
+const sizes = [16, 24, 32, 48]
 const spacing = [0, 4, 8, 16, 24]
 const colors = {
   black: ['#333333', '#CFCFCF', '#E8E8E8', '#FFFFFF'],
