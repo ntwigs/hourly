@@ -36,19 +36,33 @@ const useAmount = ({ time, rate, cost }: UseAmount): string => {
 }
 
 interface Props {
-  time?: string
+  timeObserver: (fn: MutationCallback) => void
+  defaultTime?: string
   index?: number
 }
 
 export const Content = ({
-  time = '',
+  timeObserver,
+  defaultTime = '',
   index = 0,
 }: Props): JSX.Element | null => {
   const theme = useTheme()
   const [item, setItem] = useState<Item>()
   const [rate, setRate] = useState<string | undefined>()
   const [cost, setCost] = useState<string | undefined>()
+  const [time, setTime] = useState<string>(defaultTime)
   const amount = useAmount({ time, rate, cost })
+
+  useEffect(() => {
+    const callback: MutationCallback = (mutations) => {
+      const [mutation] = mutations
+      const nodes = mutation.addedNodes
+      const [time] = Array.from(nodes)
+      setTime(time.textContent!)
+    }
+
+    timeObserver(callback)
+  }, [])
 
   useEffect(() => {
     chrome.storage.local.get('selection').then(({ selection: _selection }) => {

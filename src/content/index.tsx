@@ -28,30 +28,53 @@ const addToLoadedTasks =
     })
   }
 
-const addToTasks = ({ node }: Node): void => {
+const getElements = ({ node }: Node): Element[] => {
   const billable = node.querySelectorAll(BILLABLE_QUERY)
   const nonbillable = node.querySelectorAll(NON_BILLABLE_QUERY)
-  const elements = [...Array.from(billable), ...Array.from(nonbillable)]
+  return [...Array.from(billable), ...Array.from(nonbillable)]
+}
+
+const observeTime =
+  ({ node }: Node) =>
+  (fn: MutationCallback) => {
+    const observer = new MutationObserver(fn)
+    observer.observe(node, config)
+  }
+
+interface AddToTasks extends Node {
+  isTimer?: boolean
+}
+
+const addToTasks = ({ node, isTimer }: AddToTasks): void => {
+  const elements = getElements({ node })
 
   elements.forEach((element) => {
-    const sibling = element?.nextElementSibling
+    const sibling = isTimer
+      ? element?.parentElement?.nextElementSibling
+      : element?.nextElementSibling
 
     if (!sibling) return
     if (sibling.classList.value === HOURLY_ROOT) return
 
-    const time = sibling.querySelector(DURATION_QUERY)?.textContent
-
+    const time = sibling.querySelector(DURATION_QUERY)
     if (!time) return
+
+    const timeObserver = observeTime({ node: time.parentElement! })
 
     const root = document.createElement('div')
     root.className = HOURLY_ROOT
 
-    element.insertAdjacentElement('afterend', root)
+    isTimer
+      ? element.parentElement?.insertAdjacentElement('afterend', root)
+      : element.insertAdjacentElement('afterend', root)
 
     ReactDOM.render(
       <React.StrictMode>
         <ThemeProvider theme={theme}>
-          <Content time={time} />
+          <Content
+            defaultTime={time.textContent || ''}
+            timeObserver={timeObserver}
+          />
         </ThemeProvider>
       </React.StrictMode>,
       root
@@ -61,13 +84,12 @@ const addToTasks = ({ node }: Node): void => {
 
 const observeTasks = ({ node }: Node): void => {
   addToTasks({ node })
-  console.log('this should trigger once')
   const observer = new MutationObserver(addToLoadedTasks({ node }))
   observer.observe(node, config)
 }
 
 const addToTimer = ({ node }: Node): void => {
-  console.log('found timer')
+  addToTasks({ node, isTimer: true })
 }
 
 const callback: MutationCallback = (mutations, observer) => {
