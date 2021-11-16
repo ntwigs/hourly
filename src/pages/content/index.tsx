@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import { useTheme } from 'styled-components'
 import { ContentIcon } from '../../components/content-icon'
 import { Item } from '../../data/items'
@@ -37,9 +37,13 @@ const useAmount = ({ time, rate, cost }: UseAmount): string => {
 
 interface Props {
   time?: string
+  index?: number
 }
 
-export const Content = ({ time }: Props): JSX.Element | null => {
+export const Content = ({
+  time = '',
+  index = 0,
+}: Props): JSX.Element | null => {
   const theme = useTheme()
   const [item, setItem] = useState<Item>()
   const [rate, setRate] = useState<string | undefined>()
@@ -93,20 +97,53 @@ export const Content = ({ time }: Props): JSX.Element | null => {
   }
 
   return (
-    <motion.div initial="mount" style={{ width: 48 }} key={item.name}>
+    <motion.div
+      custom={index}
+      initial="unmount"
+      animate="mount"
+      variants={itemvariants}
+      style={{ minWidth: 90 }}
+      key={item.name}
+    >
       <div
         style={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           flexShrink: 0,
         }}
       >
-        <ContentIcon as="div" color={theme.colors.blue[0]}>
-          <Icon icon={item.name} />
-        </ContentIcon>
-        {time && <span style={{ fontWeight: 'bold' }}>{amount}</span>}
+        <motion.div variants={variants}>
+          <ContentIcon as="div" color={theme.colors.blue[0]}>
+            <Icon icon={item.name} />
+          </ContentIcon>
+        </motion.div>
+        <motion.div variants={variants}>
+          {time && <span style={{ fontWeight: 'bold' }}>{amount}</span>}
+        </motion.div>
       </div>
     </motion.div>
   )
+}
+
+const itemvariants: Variants = {
+  mount: {
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.5,
+    },
+  },
+}
+
+const variants: Variants = {
+  mount: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+  },
+  unmount: {
+    opacity: 0,
+    y: 50,
+    rotate: 180,
+  },
 }
