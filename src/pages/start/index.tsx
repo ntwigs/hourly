@@ -7,6 +7,7 @@ import { Layout } from '../../components/layout'
 import { Spacer } from '../../components/spacer'
 import { Circle } from '../../components/circle'
 import { Item, items } from '../../data/items'
+import { storage } from '../../utils/storage'
 
 const DEFAULT_HOURLY_RATE = '100'
 
@@ -34,7 +35,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
   const [selection, setSelection] = useState<Item | undefined>()
 
   useEffect(() => {
-    chrome.storage.local.get('selection').then(({ selection: _selection }) => {
+    storage.get('selection').then(({ selection: _selection }) => {
       if (_selection) {
         setSelection(_selection)
       } else {
@@ -45,7 +46,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
 
   const _setSelection = (selection: Item) => {
     setSelection(selection)
-    chrome.storage.local.set({ selection })
+    storage.set({ selection })
   }
 
   return [selection, _setSelection]
