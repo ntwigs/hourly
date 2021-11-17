@@ -3,7 +3,9 @@ import { useTheme } from 'styled-components'
 import { ContentIcon } from '../../components/content-icon'
 import { Item } from '../../data/items'
 import { Icon } from '../../components/icons'
-import { useMemo, useEffect, useState } from 'react'
+import { useMemo, useEffect } from 'react'
+import { useStorageState } from '../../hooks/use-storage-state'
+import { useTimeObserver } from '../../hooks/use-time-observer'
 
 interface UseAmount {
   time?: string
@@ -40,47 +42,17 @@ interface Props {
   defaultTime?: string
   index?: number
 }
-
 export const Content = ({
   timeObserver,
   defaultTime = '',
   index = 0,
 }: Props): JSX.Element | null => {
   const theme = useTheme()
-  const [item, setItem] = useState<Item>()
-  const [rate, setRate] = useState<string | undefined>()
-  const [cost, setCost] = useState<string | undefined>()
-  const [time, setTime] = useState<string>(defaultTime)
+  const [rate, setRate] = useStorageState<string>({ selector: 'rate' })
+  const [cost, setCost] = useStorageState<string>({ selector: 'cost' })
+  const [item, setItem] = useStorageState<Item>({ selector: 'selection' })
+  const time = useTimeObserver({ defaultTime, timeObserver })
   const amount = useAmount({ time, rate, cost })
-
-  useEffect(() => {
-    const callback: MutationCallback = (mutations) => {
-      const [mutation] = mutations
-      const nodes = mutation.addedNodes
-      const [time] = Array.from(nodes)
-      setTime(time.textContent!)
-    }
-
-    timeObserver(callback)
-  }, [])
-
-  useEffect(() => {
-    chrome.storage.local.get('selection').then(({ selection: _selection }) => {
-      setItem(_selection)
-    })
-  }, [])
-
-  useEffect(() => {
-    chrome.storage.local.get('rate').then(({ rate: _rate }) => {
-      setRate(_rate)
-    })
-  }, [])
-
-  useEffect(() => {
-    chrome.storage.local.get('cost').then(({ cost: _cost }) => {
-      setCost(_cost)
-    })
-  }, [])
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener(
