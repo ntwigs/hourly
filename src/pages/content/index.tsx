@@ -68,10 +68,10 @@ export const Content = ({
         if (selection && selection.name !== item?.name) {
           setItem(selection)
         }
-        if (rate && rate.length > 0) {
+        if (rate && rate.length > 0 && +rate > 0) {
           setRate(rate)
         }
-        if (cost && cost.length > 0) {
+        if (cost && cost.length > 0 && +cost > 0) {
           setCost(cost)
         }
       }
