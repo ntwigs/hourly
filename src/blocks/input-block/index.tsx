@@ -1,12 +1,15 @@
 import { Section } from '../../components/section'
 import { InputTitle, InputValue } from '../../components/typography'
 import { Input } from '../../components/input'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { Spacer } from '../../components/spacer'
 import styled from 'styled-components'
 import { AnimatedText } from '../../components/animated-text'
 import { motion, Variants } from 'framer-motion'
 import { Item } from '../../data/items'
+import { storage, StorageKeys } from '../../utils/storage'
+import { useDispatch } from '../../hooks/use-dispatch'
+import { useDidUpdate } from '../../hooks/use-did-update'
 
 const Symbol = styled(InputValue)(({ theme }) => ({
   position: 'absolute',
@@ -27,7 +30,7 @@ const InputContainer = styled(motion.div)({
 interface Props {
   title: string
   defaultValue: string
-  store: string
+  store: StorageKeys
   max?: number
   item?: Item
 }
@@ -52,18 +55,18 @@ const inputVariants = {
 }
 
 const useInput = (
-  store: string,
+  store: StorageKeys,
   defaultValue: string
 ): [string | undefined, (text: string) => void] => {
   const [input, setInput] = useState<string>()
 
   const _setInput = (value: string) => {
     setInput(value)
-    chrome.storage.local.set({ [store]: value })
+    storage.set({ [store]: value })
   }
 
   useEffect(() => {
-    chrome.storage.local.get(store).then((_input) => {
+    storage.get(store).then((_input) => {
       const storedInput = _input[store]
       if (storedInput) {
         setInput(storedInput)
@@ -78,13 +81,6 @@ const useInput = (
 
 const isNumber = (number: unknown): number is number =>
   typeof +(number as string) === 'number'
-
-const useDidUpdate = (fn: () => void, input: unknown[]): void => {
-  const ref = useRef(false)
-  useEffect(() => {
-    ref.current ? fn() : (ref.current = true)
-  }, input)
-}
 
 export const InputBlock = ({
   title,
@@ -101,15 +97,7 @@ export const InputBlock = ({
     }
   }, [item])
 
-  useEffect(() => {
-    chrome.tabs.query({}, (tabs) => {
-      tabs.forEach((tab) => {
-        if (tab.id) {
-          chrome.tabs.sendMessage(tab.id, { [store]: value })
-        }
-      })
-    })
-  }, [value])
+  useDispatch({ storageKey: store, value })
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
