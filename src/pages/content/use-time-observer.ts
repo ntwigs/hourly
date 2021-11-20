@@ -19,7 +19,8 @@ export const useTimeObserver = ({
       setTime(time.textContent!)
     }
 
-    timeObserver(callback)
+    const observer = timeObserver(callback)
+    return () => observer.disconnect()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
