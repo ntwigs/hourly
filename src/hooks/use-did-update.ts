@@ -4,5 +4,6 @@ export const useDidUpdate = (fn: () => void, input: unknown[]): void => {
   const ref = useRef(false)
   useEffect(() => {
     ref.current ? fn() : (ref.current = true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, input)
 }
