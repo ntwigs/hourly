@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { AnimatedText } from '../../components/animated-text'
 import { motion, Variants } from 'framer-motion'
 import { Item } from '../../data/items'
-import { storage, StorageKeys } from '../../utils/storage'
+import { Event, storage } from '../../utils/storage'
 import { useDispatch } from '../../hooks/use-dispatch'
 import { useDidUpdate } from '../../hooks/use-did-update'
 
@@ -30,7 +30,7 @@ const InputContainer = styled(motion.div)({
 interface Props {
   title: string
   defaultValue: string
-  store: StorageKeys
+  store: keyof Event
   max?: number
   item?: Item
 }
@@ -55,7 +55,7 @@ const inputVariants = {
 }
 
 const useInput = (
-  store: StorageKeys,
+  store: keyof Event,
   defaultValue: string
 ): [string | undefined, (text: string) => void] => {
   const [input, setInput] = useState<string>()
@@ -74,6 +74,7 @@ const useInput = (
         _setInput(`${defaultValue}`)
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return [input, _setInput]

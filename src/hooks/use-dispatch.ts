@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { StorageKeys } from '../utils/storage'
+import { Event } from '../utils/storage'
 
 interface UseDispatch {
-  storageKey: StorageKeys[number]
+  storageKey: keyof Event
   value: unknown
 }
 
@@ -15,5 +15,6 @@ export const useDispatch = ({ storageKey, value }: UseDispatch) => {
         }
       })
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 }

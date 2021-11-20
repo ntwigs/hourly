@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { storage, StorageKeys } from '../utils/storage'
+import { storage, Event } from '../utils/storage'
 
 interface UseStorageState {
-  selector: StorageKeys
+  selector: keyof Event
 }
 
 export const useStorageState = <T extends {}>({
