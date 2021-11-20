@@ -36,9 +36,10 @@ const getElements = ({ node }: Node): Element[] => {
 
 const observeTime =
   ({ node }: Node) =>
-  (fn: MutationCallback) => {
+  (fn: MutationCallback): MutationObserver => {
     const observer = new MutationObserver(fn)
     observer.observe(node, config)
+    return observer
   }
 
 interface AddToTasks extends Node {
