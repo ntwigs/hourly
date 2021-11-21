@@ -49,9 +49,8 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
     if (!isElement(parent) || !isElement(sibling)) return
 
     const hasExistingRoot = getHasExistingRoot({ element: sibling })
-    if (hasExistingRoot) return
+    if (hasExistingRoot || !isElement(element.parentElement)) return
 
-    if (!isElement(element.parentElement)) return
     const timeObserver = observeTime({ node: element.parentElement, selector })
 
     const root = document.createElement('div')
