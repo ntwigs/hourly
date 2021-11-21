@@ -47,8 +47,10 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
   elements.forEach((element) => {
     const [parent, sibling] = getSibling({ selector, element })
     if (!isElement(parent) || !isElement(sibling)) return
+
     const hasExistingRoot = getHasExistingRoot({ element: sibling })
     if (hasExistingRoot) return
+
     if (!isElement(element.parentElement)) return
     const timeObserver = observeTime({ node: element.parentElement, selector })
 
