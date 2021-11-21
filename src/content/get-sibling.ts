@@ -27,15 +27,17 @@ export const getSibling = ({ selector, element }: GetSibling): Element[] => {
     const parent =
       element?.parentElement?.parentElement?.parentElement?.parentElement
         ?.parentElement
-    return getElements({ parent })
+
+    const hasClasses = !!parent?.classList.value
+
+    if (hasClasses) {
+      return getElements({ parent })
+    }
   }
 
-  if (selector === 'summary') {
-    const parent =
-      element?.parentElement?.parentElement?.parentElement?.parentElement
-        ?.parentElement
-    return getElements({ parent })
+  const parent = element?.parentElement
+  if (isElement(parent)) {
+    parent.style.marginLeft = '0'
   }
-
-  return []
+  return getElements({ parent })
 }
