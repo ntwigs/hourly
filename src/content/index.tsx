@@ -1,3 +1,4 @@
+import { hasElements } from '../utils/has-elements'
 import { isChildList } from '../utils/is-child-list'
 import { isElement } from '../utils/is-element'
 import { addToDom } from './add-to-dom'
@@ -17,9 +18,10 @@ interface Node extends Selectors {
 const addToLoadedTasks =
   ({ node, selector }: Node): MutationCallback =>
   (mutations): void => {
-    mutations.filter(isChildList).forEach(() => {
+    const childList = mutations.filter(isChildList)
+    if (hasElements(childList)) {
       addToDom({ node, selector })
-    })
+    }
   }
 
 const observeTasks = ({ node, selector }: Node): void => {
