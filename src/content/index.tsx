@@ -1,4 +1,3 @@
-import { hasElements } from '../utils/has-elements'
 import { isChildList } from '../utils/is-child-list'
 import { isElement } from '../utils/is-element'
 import { addToDom } from './add-to-dom'
@@ -23,8 +22,7 @@ const addToLoadedTasks =
     })
   }
 
-const observeTasks = ({ node }: Node): void => {
-  const selector = 'entry'
+const observeTasks = ({ node, selector }: Node): void => {
   addToDom({ node, selector })
   const observer = new MutationObserver(addToLoadedTasks({ node, selector }))
   observer.observe(node, config)
@@ -34,7 +32,7 @@ const addToTimer = ({ node, selector }: Node): void => {
   addToDom({ node, selector })
 }
 
-const callback: MutationCallback = (mutations, observer) => {
+const callback: MutationCallback = (_, observer) => {
   const childList = document.querySelector(CONTENT_QUERY)
 
   if (childList) {
