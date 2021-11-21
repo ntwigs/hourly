@@ -7,6 +7,7 @@ import { useTimeObserver } from './use-time-observer'
 import { useOnMessage } from './use-on-message'
 import { Event } from '../../utils/storage'
 import { useAmount } from './use-amount'
+import { ContentText } from '../../components/typography'
 
 const ContentContainer = styled(motion.div)({
   minWidth: 90,
@@ -59,7 +60,7 @@ export const Content = ({
           </ContentIcon>
         </motion.div>
         <motion.div variants={variants}>
-          {time && <span style={{ fontWeight: 'bold' }}>{amount}</span>}
+          {time && <ContentText>{amount}</ContentText>}
         </motion.div>
       </VerticalCenter>
     </ContentContainer>

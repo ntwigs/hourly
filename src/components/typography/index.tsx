@@ -19,6 +19,12 @@ const InputTitleBase = styled(Typography)(({ theme }) => ({
 const InputValueBase = styled(Typography)(({ theme }) => ({
   fontWeight: theme.weight[1],
 }))
+const ContentTextBase = styled(Typography)(({ theme }) => ({
+  fontWeight: theme.weight[2],
+  color: 'inherit',
+  fontFamily: 'inherit',
+  fontSize: 'inherit',
+}))
 
 interface Props {
   children: ReactNode
@@ -35,4 +41,10 @@ export const InputTitle = ({ children, ...props }: Props): JSX.Element => (
 )
 export const InputValue = ({ children, ...props }: Props): JSX.Element => (
   <InputValueBase {...props}>{children}</InputValueBase>
+)
+
+export const ContentText = ({ children, ...props }: Props) => (
+  <ContentTextBase as="span" {...props}>
+    {children}
+  </ContentTextBase>
 )
