@@ -59,8 +59,8 @@ export const Content = ({
             <Icon icon={item.name} />
           </ContentIcon>
         </motion.div>
-        <motion.div variants={variants}>
-          {time && <ContentText>{amount}</ContentText>}
+        <motion.div variants={variants} key={amount}>
+          {amount && <ContentText>{amount}</ContentText>}
         </motion.div>
       </VerticalCenter>
     </ContentContainer>
