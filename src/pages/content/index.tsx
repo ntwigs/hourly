@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { ContentIcon } from '../../components/content-icon'
 import { Icon } from '../../components/icons'
 import { useStorageState } from '../../hooks/use-storage-state'
@@ -7,6 +7,16 @@ import { useTimeObserver } from './use-time-observer'
 import { useOnMessage } from './use-on-message'
 import { Event } from '../../utils/storage'
 import { useAmount } from './use-amount'
+
+const ContentContainer = styled(motion.div)({
+  minWidth: 90,
+})
+
+const VerticalCenter = styled.div({
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+})
 
 interface Props {
   timeObserver: (fn: MutationCallback) => MutationObserver
@@ -35,22 +45,14 @@ export const Content = ({
   }
 
   return (
-    <motion.div
+    <ContentContainer
       custom={index}
       initial="unmount"
       animate="mount"
       variants={itemvariants}
-      style={{ minWidth: 90 }}
       key={item.name}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          flexShrink: 0,
-        }}
-      >
+      <VerticalCenter>
         <motion.div variants={variants}>
           <ContentIcon as="div" color={theme.colors.blue[0]}>
             <Icon icon={item.name} />
@@ -59,8 +61,8 @@ export const Content = ({
         <motion.div variants={variants}>
           {time && <span style={{ fontWeight: 'bold' }}>{amount}</span>}
         </motion.div>
-      </div>
-    </motion.div>
+      </VerticalCenter>
+    </ContentContainer>
   )
 }
 
