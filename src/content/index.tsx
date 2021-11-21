@@ -1,117 +1,57 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Content } from '../pages/content'
-import { ThemeProvider } from 'styled-components'
-import { theme } from '../theme'
+import { hasElements } from '../utils/has-elements'
+import { isChildList } from '../utils/is-child-list'
+import { isElement } from '../utils/is-element'
+import { addToDom } from './add-to-dom'
+import { Selectors } from './selectors'
 
 const config = {
   childList: true,
   subtree: true,
 }
 
-const HOURLY_ROOT = 'hourly-root'
-const DURATION_QUERY = '.time-format-utils__duration'
-const BILLABLE_QUERY = '*[title="Billable"]'
-const NON_BILLABLE_QUERY = '*[title="Non-billable"]'
 const CONTENT_QUERY = '*[data-heap-id="timer-page-list"]'
 
-interface Node {
+interface Node extends Selectors {
   node: Element
 }
 
 const addToLoadedTasks =
-  ({ node }: Node): MutationCallback =>
+  ({ node, selector }: Node): MutationCallback =>
   (mutations): void => {
-    mutations.forEach((mutation) => {
-      if (mutation.type !== 'childList') return
-      addToTasks({ node })
+    mutations.filter(isChildList).forEach(() => {
+      addToDom({ node, selector })
     })
   }
 
-const getElements = ({ node }: Node): Element[] => {
-  const billable = node.querySelectorAll(BILLABLE_QUERY)
-  const nonbillable = node.querySelectorAll(NON_BILLABLE_QUERY)
-  return [...Array.from(billable), ...Array.from(nonbillable)]
-}
-
-const observeTime =
-  ({ node }: Node) =>
-  (fn: MutationCallback): MutationObserver => {
-    const observer = new MutationObserver(fn)
-    observer.observe(node, config)
-    return observer
-  }
-
-interface AddToTasks extends Node {
-  isTimer?: boolean
-}
-
-const addToTasks = ({ node, isTimer }: AddToTasks): void => {
-  const elements = getElements({ node })
-
-  elements.forEach((element) => {
-    const sibling = isTimer
-      ? element?.parentElement?.nextElementSibling
-      : element?.nextElementSibling
-
-    if (!sibling) return
-    if (sibling.classList.value === HOURLY_ROOT) return
-
-    const time = sibling.querySelector(DURATION_QUERY)
-    if (!time) return
-
-    const timeObserver = observeTime({ node: time.parentElement! })
-
-    const root = document.createElement('div')
-    root.className = HOURLY_ROOT
-
-    isTimer
-      ? element.parentElement?.insertAdjacentElement('afterend', root)
-      : element.insertAdjacentElement('afterend', root)
-
-    ReactDOM.render(
-      <React.StrictMode>
-        <ThemeProvider theme={theme}>
-          <Content
-            defaultTime={time.textContent || ''}
-            timeObserver={timeObserver}
-          />
-        </ThemeProvider>
-      </React.StrictMode>,
-      root
-    )
-  })
-}
-
 const observeTasks = ({ node }: Node): void => {
-  addToTasks({ node })
-  const observer = new MutationObserver(addToLoadedTasks({ node }))
+  const selector = 'entry'
+  addToDom({ node, selector })
+  const observer = new MutationObserver(addToLoadedTasks({ node, selector }))
   observer.observe(node, config)
 }
 
-const addToTimer = ({ node }: Node): void => {
-  addToTasks({ node, isTimer: true })
+const addToTimer = ({ node, selector }: Node): void => {
+  addToDom({ node, selector })
 }
 
 const callback: MutationCallback = (mutations, observer) => {
-  let hasFoundTimer = false
+  const childList = document.querySelector(CONTENT_QUERY)
 
-  mutations.forEach((mutation) => {
-    if (mutation.type === 'childList') {
-      const timer = document.querySelector(CONTENT_QUERY)
+  if (childList) {
+    const timer = document.querySelector(CONTENT_QUERY)
+    const timerSection = timer?.firstElementChild
+    const taskSection = timer?.lastElementChild
 
-      if (timer && !hasFoundTimer) {
-        hasFoundTimer = true
-        const timerSection = timer.firstElementChild
-        const taskSection = timer.lastElementChild
-
-        observeTasks({ node: taskSection! })
-        addToTimer({ node: timerSection! })
-
-        observer.disconnect()
-      }
+    if (isElement(taskSection)) {
+      observeTasks({ node: taskSection, selector: 'entry' })
     }
-  })
+
+    if (isElement(timerSection)) {
+      addToTimer({ node: timerSection, selector: 'timer' })
+    }
+
+    observer.disconnect()
+  }
 }
 
 const addToToggl = () => {
