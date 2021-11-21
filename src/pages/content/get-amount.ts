@@ -17,5 +17,6 @@ export const getAmount = ({ time, rate, cost }: Amount): string => {
   const decimalHours = +hours + +minutes / 60 + +seconds / 3600
 
   const salary = +rate * decimalHours
-  return (salary / +cost).toFixed(0)
+  const formattedAmount = (salary / +cost).toFixed(0)
+  return isNumber(formattedAmount) ? formattedAmount : '0'
 }

@@ -3,5 +3,11 @@ export const isNumber = (value: unknown): value is number => {
     return false
   }
 
+  const valueAsNumber = +(value as string)
+
+  if (valueAsNumber === Infinity || isNaN(valueAsNumber)) {
+    return false
+  }
+
   return typeof +(value as string) === 'number'
 }
