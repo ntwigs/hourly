@@ -49,8 +49,6 @@ const callback: MutationCallback = (_, observer) => {
     if (isElement(timerSection)) {
       addToTimer({ node: timerSection, selector: 'timer' })
     }
-
-    observer.disconnect()
   }
 }
 
