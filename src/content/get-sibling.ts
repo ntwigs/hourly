@@ -37,7 +37,9 @@ export const getSibling = ({ selector, element }: GetSibling): Element[] => {
 
   const parent = element?.parentElement
   if (isElement(parent)) {
-    parent.style.marginLeft = '0'
+    parent.style.textAlign = 'right'
+    const isDesktop = window.matchMedia('(min-width: 1024px)')
+    parent.style.width = isDesktop.matches ? '195.5px' : '110px'
   }
   return getElements({ parent })
 }
