@@ -5,7 +5,7 @@
   "name": "Hourly",
   "description": "Convert that old boring time into something fun - like burgers.",
   "version": "0.0.1",
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "web_accessible_resources": [{ 
     "resources": ["static/media/*.svg"],
     "matches": ["<all_urls>"]
@@ -18,6 +18,9 @@
       "run_at": "document_end"
     }
   ],
+  "background": {
+    "service_worker": "./static/js/background.js"
+  },
   "action": {
     "default_title": "Hourly",
     "default_popup": "index.html"

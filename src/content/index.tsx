@@ -49,6 +49,8 @@ const callback: MutationCallback = (_, observer) => {
     if (isElement(timerSection)) {
       addToTimer({ node: timerSection, selector: 'timer' })
     }
+
+    observer.disconnect()
   }
 }
 
@@ -61,4 +63,8 @@ const addToToggl = () => {
   }
 }
 
-addToToggl()
+chrome.runtime.onMessage.addListener((request) => {
+  if (request.message === 'path-change') {
+    addToToggl()
+  }
+})
