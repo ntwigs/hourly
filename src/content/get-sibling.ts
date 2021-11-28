@@ -13,6 +13,19 @@ const getElements = ({ parent }: Parent): Element[] => {
   return []
 }
 
+interface SumPosition {
+  element: HTMLElement
+}
+
+const setSumPositionElement = ({ element }: SumPosition) => {
+  const onChange = () => {
+    const isDesktop = window.matchMedia('(min-width: 1024px)')
+    element.style.width = isDesktop.matches ? '195.5px' : '110px'
+    isDesktop.addEventListener('change', onChange, { once: true })
+  }
+  return onChange
+}
+
 interface GetSibling extends Selectors {
   element: Element
 }
@@ -38,8 +51,8 @@ export const getSibling = ({ selector, element }: GetSibling): Element[] => {
   const parent = element?.parentElement
   if (isElement(parent)) {
     parent.style.textAlign = 'right'
-    const isDesktop = window.matchMedia('(min-width: 1024px)')
-    parent.style.width = isDesktop.matches ? '195.5px' : '110px'
+    const setSumPosition = setSumPositionElement({ element: parent })
+    setSumPosition()
   }
   return getElements({ parent })
 }
