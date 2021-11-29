@@ -64,6 +64,7 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
           <Content
             defaultTime={element.textContent || ''}
             timeObserver={timeObserver}
+            isTimer={selector === 'timer'}
           />
         </ThemeProvider>
       </React.StrictMode>,
