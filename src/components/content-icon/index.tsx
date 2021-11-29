@@ -8,6 +8,7 @@ export const ContentIcon = styled(Item)(({ theme }) => ({
   background: 'transparent',
   cursor: 'auto',
   color: theme.colors.black[0],
+
   '&:hover': {
     background: 'transparent',
   },

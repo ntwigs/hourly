@@ -11,10 +11,10 @@ const Typography = styled.h2(({ theme }) => ({
 const TitleBase = styled(Typography)(({ theme }) => ({
   fontSize: theme.sizes[1],
   fontWeight: theme.weight[2],
-  color: theme.colors.black[3],
+  color: theme.colors.black[4],
 }))
 const InputTitleBase = styled(Typography)(({ theme }) => ({
-  color: theme.colors.black[3],
+  color: theme.colors.black[4],
 }))
 const InputValueBase = styled(Typography)(({ theme }) => ({
   fontWeight: theme.weight[1],
