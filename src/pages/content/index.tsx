@@ -23,12 +23,14 @@ interface Props {
   timeObserver: (fn: MutationCallback) => MutationObserver
   defaultTime?: string
   index?: number
+  isTimer?: boolean
 }
 
 export const Content = ({
   timeObserver,
   defaultTime = '',
   index = 0,
+  isTimer,
 }: Props): JSX.Element | null => {
   const theme = useTheme()
   const [rate, setRate] = useStorageState<Event['rate']>({ selector: 'rate' })
@@ -37,7 +39,7 @@ export const Content = ({
     selector: 'selection',
   })
   const time = useTimeObserver({ defaultTime, timeObserver })
-  const amount = useAmount({ time, rate, cost })
+  const { items, percentage } = useAmount({ time, rate, cost })
 
   useOnMessage({ item, setItem, setRate, setCost })
 
@@ -56,11 +58,14 @@ export const Content = ({
       <VerticalCenter>
         <motion.div variants={variants}>
           <ContentIcon as="div" color={theme.colors.blue[0]}>
-            <Icon icon={item.name} />
+            <Icon
+              percentage={isTimer ? percentage : undefined}
+              icon={item.name}
+            />
           </ContentIcon>
         </motion.div>
-        <motion.div variants={variants} key={amount}>
-          {amount && <ContentText>{amount}</ContentText>}
+        <motion.div variants={variants} key={items}>
+          <ContentText>{items}</ContentText>
         </motion.div>
       </VerticalCenter>
     </ContentContainer>
