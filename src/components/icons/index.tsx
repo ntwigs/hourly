@@ -7,10 +7,12 @@ import { Apple } from './apple'
 import { Coffee } from './coffee'
 import { Cookie } from './cookie'
 import { Gamepad } from './gamepad'
+import { Fill, GRADIENT_ID } from './types'
+import { Gradient } from './gradient'
 
 type Icons = typeof items[number]['name']
 
-const icons: Record<Icons, () => JSX.Element> = {
+const icons: Record<Icons, ({ fill }: Fill) => JSX.Element> = {
   beer: Beer,
   apple: Apple,
   coffee: Coffee,
@@ -23,9 +25,19 @@ const icons: Record<Icons, () => JSX.Element> = {
 
 interface Props {
   icon: keyof typeof icons
+  percentage?: number
 }
 
-export const Icon = ({ icon }: Props): JSX.Element => {
+export const Icon = ({ icon, percentage }: Props): JSX.Element => {
   const Component = icons[icon]
-  return <Component />
+  const hasPercentage = percentage !== undefined
+
+  return (
+    <svg key={icon} viewBox="0 0 32 32">
+      {hasPercentage && <Gradient percentage={percentage} />}
+      <Component
+        fill={hasPercentage ? `url(#${GRADIENT_ID})` : 'currentColor'}
+      />
+    </svg>
+  )
 }
