@@ -53,10 +53,9 @@ export const Content = ({
       initial="unmount"
       animate="mount"
       variants={itemvariants}
-      key={item.name}
     >
       <VerticalCenter>
-        <motion.div variants={variants}>
+        <motion.div variants={variants} key={item.name}>
           <ContentIcon as="div" color={theme.colors.blue[0]}>
             <Icon
               percentage={isTimer ? percentage : undefined}
@@ -64,7 +63,7 @@ export const Content = ({
             />
           </ContentIcon>
         </motion.div>
-        <motion.div variants={textVariants}>
+        <motion.div variants={textVariants} key={items}>
           <ContentText>{items}</ContentText>
         </motion.div>
       </VerticalCenter>
