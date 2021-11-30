@@ -64,7 +64,7 @@ export const Content = ({
             />
           </ContentIcon>
         </motion.div>
-        <motion.div variants={variants} key={items}>
+        <motion.div variants={textVariants}>
           <ContentText>{items}</ContentText>
         </motion.div>
       </VerticalCenter>
@@ -91,5 +91,16 @@ const variants: Variants = {
     opacity: 0,
     y: 50,
     rotate: 180,
+  },
+}
+
+const textVariants: Variants = {
+  mount: {
+    opacity: 1,
+    y: 0,
+  },
+  unmount: {
+    opacity: 0,
+    y: 50,
   },
 }
