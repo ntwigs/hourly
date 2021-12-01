@@ -9,10 +9,6 @@ import { Event } from '../../utils/storage'
 import { useAmount } from './use-amount'
 import { ContentText } from '../../components/typography'
 
-const ContentContainer = styled(motion.div)({
-  minWidth: 90,
-})
-
 const VerticalCenter = styled.div({
   display: 'flex',
   justifyContent: 'flex-start',
@@ -48,11 +44,12 @@ export const Content = ({
   }
 
   return (
-    <ContentContainer
+    <motion.div
       custom={index}
       initial="unmount"
-      animate="mount"
+      whileInView="mount"
       variants={itemvariants}
+      viewport={{ once: true }}
     >
       <VerticalCenter>
         <motion.div variants={variants} key={item.name}>
@@ -67,16 +64,20 @@ export const Content = ({
           <ContentText>{items}</ContentText>
         </motion.div>
       </VerticalCenter>
-    </ContentContainer>
+    </motion.div>
   )
 }
 
 const itemvariants: Variants = {
   mount: {
+    width: 90,
     transition: {
       staggerChildren: 0.25,
-      delayChildren: 0.5,
+      delayChildren: 0.25,
     },
+  },
+  unmount: {
+    width: 0,
   },
 }
 
