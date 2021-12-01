@@ -35,21 +35,21 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
   const [selection, setSelection] = useState<Item | undefined>()
 
   useEffect(() => {
-    storage.get('selection').then(({ selection: _selection }) => {
-      if (_selection) {
-        setSelection(_selection)
+    storage.get('selection').then(({ selection }) => {
+      if (selection) {
+        setSelection(selection)
       } else {
-        _setSelection(items[0])
+        setStorageSelection(items[0])
       }
     })
   }, [])
 
-  const _setSelection = (selection: Item) => {
+  const setStorageSelection = (selection: Item) => {
     setSelection(selection)
     storage.set({ selection })
   }
 
-  return [selection, _setSelection]
+  return [selection, setStorageSelection]
 }
 export const Start = (): JSX.Element | null => {
   const [selection, setSelection] = useSelection()

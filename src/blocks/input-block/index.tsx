@@ -60,24 +60,24 @@ const useInput = (
 ): [string | undefined, (text: string) => void] => {
   const [input, setInput] = useState<string>()
 
-  const _setInput = (value: string) => {
+  const setStorageInput = (value: string) => {
     setInput(value)
     storage.set({ [store]: value })
   }
 
   useEffect(() => {
-    storage.get(store).then((_input) => {
-      const storedInput = _input[store]
+    storage.get(store).then((input) => {
+      const storedInput = input[store]
       if (storedInput) {
         setInput(storedInput)
       } else {
-        _setInput(`${defaultValue}`)
+        setStorageInput(`${defaultValue}`)
       }
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return [input, _setInput]
+  return [input, setStorageInput]
 }
 
 const isNumber = (number: unknown): number is number =>

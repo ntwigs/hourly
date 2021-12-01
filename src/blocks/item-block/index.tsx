@@ -1,14 +1,14 @@
 import { Item } from '../../components/item'
 import { Grid } from '../../components/grid'
-import { Item as _Item } from '../../data/items'
+import { Item as ItemInterface } from '../../data/items'
 import { useColor } from '../../hooks/use-color'
 import { motion, Variants } from 'framer-motion'
 import { Icon } from '../../components/icons'
 
 interface Props {
-  items: _Item[]
-  onClick: (selection: _Item) => void
-  selection: _Item
+  items: ItemInterface[]
+  onClick: (selection: ItemInterface) => void
+  selection: ItemInterface
 }
 
 const parentVariants: Variants = {
@@ -51,7 +51,7 @@ export const ItemBlock = ({
   selection,
   onClick,
 }: Props): JSX.Element => {
-  const selectItem = (item: _Item) => () => void onClick(item)
+  const selectItem = (item: ItemInterface) => () => void onClick(item)
   const getColor = useColor()
 
   return (
