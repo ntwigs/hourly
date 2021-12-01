@@ -8,6 +8,7 @@ import { useOnMessage } from './use-on-message'
 import { Event } from '../../utils/storage'
 import { useAmount } from './use-amount'
 import { ContentText } from '../../components/typography'
+import { useState } from 'react'
 
 const VerticalCenter = styled.div({
   display: 'flex',
@@ -18,14 +19,12 @@ const VerticalCenter = styled.div({
 interface Props {
   timeObserver: (fn: MutationCallback) => MutationObserver
   defaultTime?: string
-  index?: number
   isTimer?: boolean
 }
 
 export const Content = ({
   timeObserver,
   defaultTime = '',
-  index = 0,
   isTimer,
 }: Props): JSX.Element | null => {
   const theme = useTheme()
@@ -38,6 +37,7 @@ export const Content = ({
   const { items, percentage } = useAmount({ time, rate, cost })
 
   useOnMessage({ item, setItem, setRate, setCost })
+  const [inView, setInView] = useState(false)
 
   if (!item || !rate || !cost) {
     return null
@@ -45,9 +45,10 @@ export const Content = ({
 
   return (
     <motion.div
-      custom={index}
       initial="unmount"
       whileInView="mount"
+      animate={inView ? 'mount' : undefined}
+      onViewportEnter={() => setInView(true)}
       variants={itemvariants}
       viewport={{ once: true }}
     >
