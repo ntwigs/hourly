@@ -1,14 +1,10 @@
 import { motion, Variants } from 'framer-motion'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { ContentIcon } from '../../components/content-icon'
 import { Icon } from '../../components/icons'
-import { useStorageState } from '../../hooks/use-storage-state'
-import { useTimeObserver } from './use-time-observer'
-import { useOnMessage } from './use-on-message'
-import { Event } from '../../utils/storage'
-import { useAmount } from './use-amount'
+import { useContent, Props } from './use-content'
 import { ContentText } from '../../components/typography'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useShouldRender } from '../../hooks/use-should-render'
 
 const VerticalCenter = styled.div({
@@ -17,46 +13,31 @@ const VerticalCenter = styled.div({
   alignItems: 'center',
 })
 
-interface Props {
-  timeObserver: (fn: MutationCallback) => MutationObserver
-  defaultTime?: string
-  isTimer?: boolean
-}
-
 export const Content = ({
   timeObserver,
   defaultTime = '',
   isTimer,
 }: Props): JSX.Element | null => {
-  const theme = useTheme()
-  const [rate, setRate] = useStorageState<Event['rate']>({ selector: 'rate' })
-  const [cost, setCost] = useStorageState<Event['cost']>({ selector: 'cost' })
-  const [item, setItem] = useStorageState<Event['selection']>({
-    selector: 'selection',
-  })
-  const time = useTimeObserver({ defaultTime, timeObserver })
-  const { items, percentage } = useAmount({ time, rate, cost })
-
-  useOnMessage({ item, setItem, setRate, setCost })
+  const { items, percentage, item } = useContent({ timeObserver, defaultTime })
   const [inView, setInView] = useState(false)
   const shouldRender = useShouldRender({ time: 500 })
+  const enterViewport = useCallback(() => setInView(true), [])
 
-  if (!shouldRender || !item || !rate || !cost) {
+  if (!shouldRender || !item) {
     return null
   }
 
   return (
     <motion.div
       initial="unmount"
-      whileInView="mount"
       animate={inView ? 'mount' : undefined}
-      onViewportEnter={() => setInView(true)}
+      onViewportEnter={enterViewport}
       variants={itemvariants}
       viewport={{ once: true }}
     >
       <VerticalCenter>
         <motion.div variants={variants} key={item.name}>
-          <ContentIcon as="div" color={theme.colors.blue[0]}>
+          <ContentIcon as="div">
             <Icon
               percentage={isTimer ? percentage : undefined}
               icon={item.name}
