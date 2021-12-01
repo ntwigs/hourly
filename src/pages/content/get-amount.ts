@@ -31,7 +31,7 @@ export const getAmount = ({ time, rate, cost }: Amount): AmountResponse => {
   const [items, decimal] = `${amount.toFixed(1)}`.split('.')
 
   return {
-    items: isNumber(items) ? items : '0',
-    percentage: isNumber(decimal) ? decimal * 10 : 0,
+    items: isNumber(items) ? items : defaultAmount.items,
+    percentage: isNumber(decimal) ? decimal * 10 : defaultAmount.percentage,
   }
 }
