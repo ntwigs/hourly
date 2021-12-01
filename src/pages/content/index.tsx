@@ -9,6 +9,7 @@ import { Event } from '../../utils/storage'
 import { useAmount } from './use-amount'
 import { ContentText } from '../../components/typography'
 import { useState } from 'react'
+import { useShouldRender } from '../../hooks/use-should-render'
 
 const VerticalCenter = styled.div({
   display: 'flex',
@@ -38,8 +39,9 @@ export const Content = ({
 
   useOnMessage({ item, setItem, setRate, setCost })
   const [inView, setInView] = useState(false)
+  const shouldRender = useShouldRender({ time: 500 })
 
-  if (!item || !rate || !cost) {
+  if (!shouldRender || !item || !rate || !cost) {
     return null
   }
 
