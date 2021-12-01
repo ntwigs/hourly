@@ -20,7 +20,7 @@ interface SumPosition {
 const setSumPositionElement = ({ element }: SumPosition) => {
   const onChange = () => {
     const isDesktop = window.matchMedia('(min-width: 1024px)')
-    element.style.width = isDesktop.matches ? '195.5px' : '110px'
+    element.style.width = isDesktop.matches ? '196px' : '110px'
     isDesktop.addEventListener('change', onChange, { once: true })
   }
   return onChange
