@@ -6,7 +6,7 @@ import { motion, Variants } from 'framer-motion'
 import { Icon } from '../../components/icons'
 
 interface Props {
-  items: ItemInterface[]
+  items: readonly ItemInterface[]
   onClick: (selection: ItemInterface) => void
   selection: ItemInterface
 }

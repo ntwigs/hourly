@@ -19,7 +19,7 @@ const config = {
 const HOURLY_ROOT = 'hourly-root'
 const DURATION_QUERY = '.time-format-utils__duration'
 
-const getElements = ({ node }: Node): Element[] => {
+const getElements = ({ node }: Node): readonly Element[] => {
   const durations = node.querySelectorAll(DURATION_QUERY)
   return Array.from(durations)
 }

@@ -5,7 +5,7 @@ interface Parent {
   parent?: Element | null
 }
 
-const getElements = ({ parent }: Parent): Element[] => {
+const getElements = ({ parent }: Parent): readonly Element[] => {
   if (isElement(parent) && isElement(parent?.previousElementSibling)) {
     return [parent, parent?.previousElementSibling]
   }
@@ -30,7 +30,10 @@ interface GetSibling extends Selectors {
   element: Element
 }
 
-export const getSibling = ({ selector, element }: GetSibling): Element[] => {
+export const getSibling = ({
+  selector,
+  element,
+}: GetSibling): readonly Element[] => {
   if (selector === 'timer') {
     const parent = element?.parentElement?.parentElement?.parentElement
     return getElements({ parent })

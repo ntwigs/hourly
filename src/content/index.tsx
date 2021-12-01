@@ -35,7 +35,7 @@ const addToTimer = ({ node, selector }: Node): void => {
 }
 
 const callback = (
-  _: MutationRecord[] | void,
+  _: readonly MutationRecord[] | void,
   observer: MutationObserver | void
 ): void => {
   const childList = document.querySelector(CONTENT_QUERY)
