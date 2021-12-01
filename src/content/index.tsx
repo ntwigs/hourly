@@ -34,7 +34,10 @@ const addToTimer = ({ node, selector }: Node): void => {
   addToDom({ node, selector })
 }
 
-const callback: MutationCallback = (_, observer) => {
+const callback = (
+  _: MutationRecord[] | void,
+  observer: MutationObserver | void
+): void => {
   const childList = document.querySelector(CONTENT_QUERY)
 
   if (childList) {
@@ -42,15 +45,17 @@ const callback: MutationCallback = (_, observer) => {
     const timerSection = timer?.firstElementChild
     const taskSection = timer?.lastElementChild
 
-    if (isElement(taskSection)) {
-      observeTasks({ node: taskSection, selector: 'entry' })
-    }
-
     if (isElement(timerSection)) {
       addToTimer({ node: timerSection, selector: 'timer' })
     }
 
-    observer.disconnect()
+    if (isElement(taskSection)) {
+      observeTasks({ node: taskSection, selector: 'entry' })
+    }
+
+    if (observer?.disconnect) {
+      observer.disconnect()
+    }
   }
 }
 
@@ -63,8 +68,9 @@ const addToToggl = () => {
   }
 }
 
+addToToggl()
 chrome.runtime.onMessage.addListener((request) => {
   if (request.message === 'path-change') {
-    addToToggl()
+    callback()
   }
 })
