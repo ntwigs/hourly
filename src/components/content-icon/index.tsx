@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { Item } from '../item'
 
-export const ContentIcon = styled(Item)(({ theme }) => ({
+interface Props {
+  color?: string
+}
+
+export const ContentIcon = styled(Item)<Props>(({ theme }) => ({
   minWidth: theme.sizes[2],
   maxWidth: theme.sizes[2],
   width: theme.sizes[2],
