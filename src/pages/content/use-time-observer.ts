@@ -17,7 +17,9 @@ export const useTimeObserver = ({
       const [mutation] = mutations
       const nodes = mutation.addedNodes
       const [time] = Array.from(nodes)
-      setTime(time.textContent!)
+      if (time.textContent) {
+        setTime(time.textContent)
+      }
     }
 
     const observer = timeObserver(callback)
