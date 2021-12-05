@@ -103,7 +103,7 @@ export const InputBlock = ({
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
 
-  const isValid = isNumber(value)
+  const isValid = isNumber(value) && `${value}`.length > 0
 
   return (
     <Section>
