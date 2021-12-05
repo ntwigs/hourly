@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { storage, Event } from '../utils/storage'
+import { useMount } from './use-mount'
 
 interface UseStorageState<T> {
   selector: keyof Event
@@ -12,7 +13,7 @@ export const useStorageState = <T extends {}>({
 }: UseStorageState<T>): [T, (prop: T) => void] => {
   const [value, setValue] = useState<T>()
 
-  useEffect(() => {
+  useMount(() => {
     storage.get(selector).then((value) => {
       const selectedValue = value[selector]
       if (selectedValue) {
@@ -21,8 +22,7 @@ export const useStorageState = <T extends {}>({
         setValue(defaultValue)
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 
   return [value as T, setValue]
 }

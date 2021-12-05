@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useMount } from '../../hooks/use-mount'
 import { isNumber } from '../../utils/is-number'
 import { Event } from '../../utils/storage'
 
@@ -15,7 +15,7 @@ export const useOnMessage = ({
   setRate,
   setCost,
 }: OnMessage) => {
-  useEffect(() => {
+  useMount(() => {
     chrome.runtime.onMessage.addListener(({ selection, rate, cost }: Event) => {
       if (selection && selection.name !== item?.name) {
         setItem(selection)
@@ -27,6 +27,5 @@ export const useOnMessage = ({
         setCost(cost)
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 }

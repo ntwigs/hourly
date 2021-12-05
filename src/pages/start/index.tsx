@@ -8,6 +8,7 @@ import { Spacer } from '../../components/spacer'
 import { Circle } from '../../components/circle'
 import { Item, items } from '../../data/items'
 import { storage } from '../../utils/storage'
+import { useMount } from '../../hooks/use-mount'
 
 const DEFAULT_HOURLY_RATE = '100'
 
@@ -34,7 +35,7 @@ const circleVariants = {
 const useSelection = (): [Item | undefined, (item: Item) => void] => {
   const [selection, setSelection] = useState<Item | undefined>()
 
-  useEffect(() => {
+  useMount(() => {
     storage.get('selection').then(({ selection }) => {
       if (selection) {
         setSelection(selection)
@@ -42,7 +43,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
         setStorageSelection(items[0])
       }
     })
-  }, [])
+  })
 
   const setStorageSelection = (selection: Item) => {
     setSelection(selection)

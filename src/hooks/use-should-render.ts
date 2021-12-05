@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useMount } from './use-mount'
 
 interface Props {
   time?: number
@@ -7,12 +8,11 @@ interface Props {
 export const useShouldRender = ({ time = 0 }: Props): boolean => {
   const [shouldRender, setShouldRender] = useState(false)
 
-  useEffect(() => {
+  useMount(() => {
     setTimeout(() => {
       setShouldRender(true)
     }, time)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 
   return shouldRender
 }

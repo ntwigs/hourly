@@ -1,7 +1,7 @@
 import { Section } from '../../components/section'
 import { InputTitle, InputValue } from '../../components/typography'
 import { Input } from '../../components/input'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { Spacer } from '../../components/spacer'
 import styled from 'styled-components'
 import { AnimatedText } from '../../components/animated-text'
@@ -10,6 +10,7 @@ import { Item } from '../../data/items'
 import { Event, storage } from '../../utils/storage'
 import { useDispatch } from '../../hooks/use-dispatch'
 import { useDidUpdate } from '../../hooks/use-did-update'
+import { useMount } from '../../hooks/use-mount'
 
 const Symbol = styled(InputValue)(({ theme }) => ({
   position: 'absolute',
@@ -65,7 +66,7 @@ const useInput = (
     storage.set({ [store]: value })
   }
 
-  useEffect(() => {
+  useMount(() => {
     storage.get(store).then((input) => {
       const storedInput = input[store]
       if (storedInput) {
@@ -74,8 +75,7 @@ const useInput = (
         setStorageInput(`${defaultValue}`)
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 
   return [input, setStorageInput]
 }

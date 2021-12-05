@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useMount } from '../../hooks/use-mount'
 
 interface UseTimeObserver {
   defaultTime: string
@@ -11,7 +12,7 @@ export const useTimeObserver = ({
 }: UseTimeObserver): string => {
   const [time, setTime] = useState<string>(defaultTime)
 
-  useEffect(() => {
+  useMount(() => {
     const callback: MutationCallback = (mutations) => {
       const [mutation] = mutations
       const nodes = mutation.addedNodes
@@ -22,9 +23,7 @@ export const useTimeObserver = ({
     const observer = timeObserver(callback)
 
     return () => observer.disconnect()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 
   return time
 }
