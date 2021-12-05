@@ -1,7 +1,18 @@
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const CracoAlias = require('craco-alias')
 const path = require('path')
 
 module.exports = {
+  plugins: [
+    {
+      plugin: CracoAlias,
+      options: {
+        source: 'tsconfig',
+        baseUrl: './src',
+        tsConfigPath: './tsconfig.extend.json',
+      },
+    },
+  ],
   webpack: {
     plugins: {
       remove: ['HtmlWebpackPlugin'],
