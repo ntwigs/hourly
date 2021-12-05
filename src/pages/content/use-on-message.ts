@@ -1,6 +1,6 @@
-import { useMount } from '../../hooks/use-mount'
-import { isNumber } from '../../utils/is-number'
-import { Event } from '../../utils/storage'
+import { useMount } from '@hooks/use-mount'
+import { isNumber } from '@utils/is-number'
+import { Event } from '@utils/storage'
 
 interface OnMessage {
   item: Event['selection']

@@ -1,6 +1,6 @@
-import { hasElements } from '../../../utils/has-elements'
-import { isChildList } from '../../../utils/is-child-list'
-import { isElement } from '../../../utils/is-element'
+import { hasElements } from '@utils/has-elements'
+import { isChildList } from '@utils/is-child-list'
+import { isElement } from '@utils/is-element'
 import { addToDom } from './add-to-dom'
 import { Selectors } from './selectors'
 

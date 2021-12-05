@@ -1,4 +1,4 @@
-import { Item } from '../data/items'
+import { Item } from '@data/items'
 
 export type Event = {
   rate: string

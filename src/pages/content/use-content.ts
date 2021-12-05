@@ -1,9 +1,9 @@
-import { useStorageState } from '../../hooks/use-storage-state'
+import { useStorageState } from '@hooks/use-storage-state'
 import { useTimeObserver } from './use-time-observer'
 import { useOnMessage } from './use-on-message'
-import { Event } from '../../utils/storage'
+import { Event } from '@utils/storage'
 import { useAmount } from './use-amount'
-import { items as defaultItems } from '../../data/items'
+import { items as defaultItems } from '@data/items'
 
 export interface Props {
   timeObserver: (fn: MutationCallback) => MutationObserver

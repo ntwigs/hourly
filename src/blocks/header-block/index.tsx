@@ -1,8 +1,8 @@
 import { motion, Variants } from 'framer-motion'
-import { AnimatedText } from '../../components/animated-text'
-import { Section } from '../../components/section'
-import { Spacer } from '../../components/spacer'
-import { Title } from '../../components/typography'
+import { AnimatedText } from '@components/animated-text'
+import { Section } from '@components/section'
+import { Spacer } from '@components/spacer'
+import { Title } from '@components/typography'
 
 interface Props {
   title: string

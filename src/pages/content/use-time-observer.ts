@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useMount } from '../../hooks/use-mount'
+import { useMount } from '@hooks/use-mount'
 
 interface UseTimeObserver {
   defaultTime: string

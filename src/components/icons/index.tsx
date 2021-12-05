@@ -1,5 +1,5 @@
 import { Beer } from './beer'
-import { items } from '../../data/items'
+import { items } from '@data/items'
 import { Wine } from './wine'
 import { Hamburger } from './hamburger'
 import { Gas } from './gas-pump'

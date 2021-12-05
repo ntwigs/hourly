@@ -1,11 +1,11 @@
 import { motion, Variants } from 'framer-motion'
 import styled from 'styled-components'
-import { ContentIcon } from '../../components/content-icon'
-import { Icon } from '../../components/icons'
+import { ContentIcon } from '@components/content-icon'
+import { Icon } from '@components/icons'
 import { useContent, Props } from './use-content'
-import { ContentText } from '../../components/typography'
+import { ContentText } from '@components/typography'
 import { useCallback, useState } from 'react'
-import { useShouldRender } from '../../hooks/use-should-render'
+import { useShouldRender } from '@hooks/use-should-render'
 
 const VerticalCenter = styled.div({
   display: 'flex',

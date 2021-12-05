@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { storage, Event } from '../utils/storage'
+import { storage, Event } from '@utils/storage'
 import { useMount } from './use-mount'
 
 interface UseStorageState<T> {

@@ -1,9 +1,9 @@
-import { Item } from '../../components/item'
-import { Grid } from '../../components/grid'
-import { Item as ItemInterface } from '../../data/items'
-import { useColor } from '../../hooks/use-color'
+import { Item } from '@components/item'
+import { Grid } from '@components/grid'
+import { Item as ItemInterface } from '@data/items'
+import { useColor } from '@hooks/use-color'
 import { motion, Variants } from 'framer-motion'
-import { Icon } from '../../components/icons'
+import { Icon } from '@components/icons'
 
 interface Props {
   items: readonly ItemInterface[]

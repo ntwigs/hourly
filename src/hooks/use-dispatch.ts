@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Event } from '../utils/storage'
+import { Event } from '@utils/storage'
 
 interface UseDispatch {
   storageKey: keyof Event

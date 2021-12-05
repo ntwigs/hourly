@@ -1,6 +1,6 @@
-import { isNumber } from '../../utils/is-number'
-import { isString } from '../../utils/is-string'
-import { Event } from '../../utils/storage'
+import { isNumber } from '@utils/is-number'
+import { isString } from '@utils/is-string'
+import { Event } from '@utils/storage'
 
 export interface Amount {
   time?: string

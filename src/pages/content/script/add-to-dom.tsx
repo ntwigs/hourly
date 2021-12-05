@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Content } from '..'
 import { ThemeProvider } from 'styled-components'
-import { theme } from '../../../theme'
+import { theme } from '@theme'
 import { getSibling } from './get-sibling'
 import { Selectors } from './selectors'
-import { isElement } from '../../../utils/is-element'
+import { isElement } from '@utils/is-element'
 
 interface Node extends Selectors {
   node: Element
