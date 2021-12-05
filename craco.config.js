@@ -36,8 +36,8 @@ module.exports = {
               require.resolve('react-dev-utils/webpackHotDevClient'),
             paths.appIndexJs,
           ].filter(Boolean),
-          content: './src/content/index.tsx',
-          background: './src/content/background.ts',
+          content: './src/pages/content/script/index.tsx',
+          background: './src/pages/content/script/background.ts',
         },
         output: {
           ...webpackConfig.output,
