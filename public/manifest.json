@@ -5,6 +5,12 @@
   "name": "Hourly",
   "description": "Convert that old boring time into something fun - like burgers.",
   "version": "0.0.1",
+  "icons": {
+    "16": "16-icon.png",
+    "32": "32-icon.png",
+    "48": "48-icon.png",
+    "128": "128-icon.png"
+  },
   "permissions": ["storage", "tabs"],
   "web_accessible_resources": [{ 
     "resources": ["static/media/*.svg"],
