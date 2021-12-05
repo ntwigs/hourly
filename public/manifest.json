@@ -3,7 +3,7 @@
   "manifest_version": 3,
   "short_name": "Hourly",
   "name": "Hourly",
-  "description": "Convert that old boring time into something fun - like burgers.",
+  "description": "Convert those Toggl entries into something fun - like burgers.",
   "version": "0.0.1",
   "icons": {
     "16": "16-icon.png",
