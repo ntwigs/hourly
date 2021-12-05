@@ -14,7 +14,8 @@ export const useTimeObserver = ({
 
   useMount(() => {
     const callback: MutationCallback = (mutations) => {
-      const [mutation] = mutations
+      const [mutation] = mutations.reverse()
+
       const nodes = mutation.addedNodes
       const [time] = Array.from(nodes)
       setTime(time.textContent!)
