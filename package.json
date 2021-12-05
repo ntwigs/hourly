@@ -20,7 +20,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "build": "react-scripts build",
     "build:extension": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false craco build",
     "test": "react-scripts test",
