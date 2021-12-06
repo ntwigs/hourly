@@ -6,6 +6,7 @@ import { theme } from '@theme'
 import { getSibling } from './get-sibling'
 import { Selectors } from './selectors'
 import { isElement } from '@utils/is-element'
+import { Intersect } from '@components/intersect'
 
 interface Node extends Selectors {
   node: Element
@@ -60,13 +61,15 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
 
     ReactDOM.render(
       <React.StrictMode>
-        <ThemeProvider theme={theme}>
-          <Content
-            defaultTime={element.textContent || ''}
-            timeObserver={timeObserver}
-            isTimer={selector === 'timer'}
-          />
-        </ThemeProvider>
+        <Intersect>
+          <ThemeProvider theme={theme}>
+            <Content
+              defaultTime={element.textContent || ''}
+              timeObserver={timeObserver}
+              isTimer={selector === 'timer'}
+            />
+          </ThemeProvider>
+        </Intersect>
       </React.StrictMode>,
       root
     )
