@@ -5,7 +5,6 @@ import { Icon } from '@components/icons'
 import { useContent, Props } from './use-content'
 import { ContentText } from '@components/typography'
 import { useCallback, useState } from 'react'
-import { useShouldRender } from '@hooks/use-should-render'
 
 const VerticalCenter = styled.div({
   display: 'flex',
@@ -20,10 +19,9 @@ export const Content = ({
 }: Props): JSX.Element | null => {
   const { items, percentage, item } = useContent({ timeObserver, defaultTime })
   const [inView, setInView] = useState(false)
-  const shouldRender = useShouldRender({ time: 500 })
   const enterViewport = useCallback(() => setInView(true), [])
 
-  if (!shouldRender || !item) {
+  if (!item) {
     return null
   }
 
