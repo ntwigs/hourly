@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const Intersect = ({ children }: Props): JSX.Element => {
-  const [inView, setInView] = useState(true)
+  const [inView, setInView] = useState(false)
 
   const onViewportEnter = useCallback(() => setInView(true), [])
   const onViewportLeave = useCallback(() => setInView(false), [])

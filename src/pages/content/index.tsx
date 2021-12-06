@@ -4,7 +4,6 @@ import { ContentIcon } from '@components/content-icon'
 import { Icon } from '@components/icons'
 import { useContent, Props } from './use-content'
 import { ContentText } from '@components/typography'
-import { useCallback, useState } from 'react'
 
 const VerticalCenter = styled.div({
   display: 'flex',
@@ -18,21 +17,13 @@ export const Content = ({
   isTimer,
 }: Props): JSX.Element | null => {
   const { items, percentage, item } = useContent({ timeObserver, defaultTime })
-  const [inView, setInView] = useState(false)
-  const enterViewport = useCallback(() => setInView(true), [])
 
   if (!item) {
     return null
   }
 
   return (
-    <motion.div
-      initial="unmount"
-      animate={inView ? 'mount' : undefined}
-      onViewportEnter={enterViewport}
-      variants={itemvariants}
-      viewport={{ once: true }}
-    >
+    <motion.div initial="unmount" animate="mount" variants={itemvariants}>
       <VerticalCenter>
         <motion.div variants={variants} key={item.name}>
           <ContentIcon as="div">
