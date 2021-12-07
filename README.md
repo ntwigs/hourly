@@ -20,14 +20,14 @@
 
 It's not only <strong>easy</strong> to use - it's also <strong>lovely</strong> to look at. Hourly allows you not only to change your hourly rate - but also what the price of an item is. With icons from [Line Awesome](https://icons8.com/line-awesome) and eight items of choice:
 
-- hamburgers ��
-- beers ��
-- bottles of wine ��
-- cookies ��
+- hamburgers 🍔
+- beers 🍻
+- bottles of wine 🍷
+- cookies 🍪
 - gas ⛽
-- apples ��
+- apples 🍎
 - coffees ☕
-- games ��
+- games 🎮
 
 You'll end up with something that makes Toggl **a lot more** than just a site where you enter your work tasks.
 
