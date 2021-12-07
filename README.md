@@ -72,8 +72,6 @@ So - what does it really do?
 So what are you waiting for? If you're not using Toggl - do that now! And **start using Hourly while you're at it**!
 
 <br>
-<hr>
-<br>
 
  <div align="center">
 	<h2>License</h2>
