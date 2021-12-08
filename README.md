@@ -2,7 +2,7 @@
 
 <p align="center">
   <p align="center">
-		<strong>Track</strong> - not only your tasks - but also your <strong>burgers</strong>.</br>
+		<strong>Track</strong> - not only your tasks - but also your <strong>burgers</strong>. 🍔</br>
 		Get it at your local <a href="https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb">Chrome Web Store</a>.
 	</p>
   <p align="center">
@@ -14,26 +14,26 @@
 
 <hr><br>
 
-## Hourly - your Toggl extension for important things
+## Hourly - your Toggl extension for important things ❤️
 
 **Toggl** could seem like a cold and boring place (no hard feelings) - just black on white, with a little bit of pink. Presenting the information that you need to keep track of all the work you're doing. Hourly takes those boring long lists of information and combines them with something <strong>amazing</strong>. That's right. Hourly gives you the possibility to keep track of how much you can afford something you <strong>love</strong>. Like how many <strong>bottles of wine</strong> that shitty task you've been at all week has provided for you.
 
-It's not only <strong>easy</strong> to use - it's also <strong>lovely</strong> to look at. Hourly allows you not only to change your hourly rate - but also what the price of an item is. With icons from [Line Awesome](https://icons8.com/line-awesome) and eight items of choice:
+It's not only <strong>easy</strong> to use - but it's also <strong>lovely</strong> to look at. Hourly allows you not only to change your hourly rate - but also what the price of an item is. With icons from [Line Awesome](https://icons8.com/line-awesome) and eight items of choice:
 
-- hamburgers 🍔
-- beers 🍻
-- bottles of wine 🍷
-- cookies 🍪
-- gas ⛽
-- apples 🍎
-- coffees ☕
-- games 🎮
+- Hamburgers 🍔
+- Beers 🍻
+- Bottles of wine 🍷
+- Cookies 🍪
+- Gas ⛽
+- Apples 🍎
+- Coffees ☕
+- Games 🎮
 
 You'll end up with something that makes Toggl **a lot more** than just a site where you enter your work tasks.
 
-## How do I use Hourly?
+## How do I use Hourly? ⌛
 
-We'll - the first thing that you'll have to know, is the fact that Hourly currently only works with the Time Tracking software **Toggl**. The second thing you'll have to do is install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb). And yes - it's currently just supported at the Chrome Web Store. **One shop stop only**. Input your hourly rate, the item you'd like to track, and the price of that item. Just like this - and you should be ready to go!
+We'll - the first thing that you'll have to know is the fact that Hourly currently only works with the Time Tracking software **Toggl**. The second thing you'll have to do is install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb). And yes - it's currently just supported at the Chrome Web Store. **One shop stop only**. Input your hourly rate, the item you'd like to track, and the price of that item. Just like this - and you should be ready to go!
 
 <table width="100%">
   <tr>
@@ -43,7 +43,7 @@ We'll - the first thing that you'll have to know, is the fact that Hourly curren
   </tr>
  </table>
 
-## What does Hourly look like?
+## Show me the beauty 💅
 
 You can see the popup that is used for configuring Hourly above - it's that little box that **pops up** whenever you click that little icon in Chrome. Filled with **animations** and other **goodies**. And for the actual Toggl entries? They look like this.
 
@@ -60,14 +60,14 @@ You can see the popup that is used for configuring Hourly above - it's that litt
   </tr>
 </table>
 
-## Features
+## Features ✔️
 
 So - what does it really do?
 
 - Shows you the sum of the number of items you've made per day.
 - Shows you the sum of the number of items that you've made per task.
-- Gives Toggl a more alive feel, with loads of animation
-- Also - doesn't it give you a real boost, know that the last task you completed, just made you 13 beers richer?
+- Gives Toggl a more alive feel, with loads of animation.
+- Also - doesn't it give you a real boost, know that the last task you completed, just made you **13 brewskies richer**? 🍻
 
 So what are you waiting for? If you're not using Toggl - do that now! And **start using Hourly while you're at it**!
 
@@ -75,6 +75,6 @@ So what are you waiting for? If you're not using Toggl - do that now! And **star
 
  <div align="center">
 	<h2>License</h2>
-	<p>Just go a head and use it for what ever - and feel free to contribute!</p>
+	<p>Just go a head and use it - and feel free to <strong>contribute</strong>!</p>
   <img alt='Licence Apache' src='https://img.shields.io/github/license/ntwigs/hourly?style=flat-square' />
 </div>
