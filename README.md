@@ -67,7 +67,7 @@ So - what does it really do?
 - Shows you the sum of the number of items you've made per day.
 - Shows you the sum of the number of items that you've made per task.
 - Gives Toggl a more alive feel, with loads of animation.
-- Also - doesn't it give you a real boost, know that the last task you completed, just made you **13 brewskies richer**? 🍻
+- Also - doesn't it give you a real boost, knowing that the last task you completed just made you **13 brewskies richer**? 🍻
 
 So what are you waiting for? If you're not using Toggl - do that now! And **start using Hourly while you're at it**!
 
