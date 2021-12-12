@@ -33,6 +33,9 @@ const itemVariants: Variants = {
   hover: {
     scale: 1.1,
   },
+  tap: {
+    scale: 0.95,
+  },
 }
 
 interface ColorIndex {
@@ -58,7 +61,7 @@ export const ItemBlock = ({
     <Grid variants={parentVariants}>
       {items.map(({ name, price }, index) => (
         <motion.div key={name} variants={itemVariants}>
-          <motion.div variants={itemVariants} whileHover="hover">
+          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap">
             <Item
               isSelected={selection.name === name}
               onClick={selectItem({ name, price })}
