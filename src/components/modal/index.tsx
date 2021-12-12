@@ -13,33 +13,37 @@ interface Props {
   text: string
   onNext?: MouseEventHandler<HTMLButtonElement>
   onBack?: MouseEventHandler<HTMLButtonElement>
-  onClose?: MouseEventHandler<HTMLButtonElement>
+  onClose?: () => void | MouseEventHandler<HTMLButtonElement>
   isFirst: boolean
   isLast: boolean
 }
 
 const Container = styled(motion.main)({
-  width: 235,
-  height: 377,
-  position: 'relative',
+  width: '100%',
+  height: '100%',
+  position: 'fixed',
+  top: 0,
+  left: 0,
   overflow: 'hidden',
-  zIndex: 1,
+  zIndex: 10,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   padding: 16,
 })
 
-const Backdrop = styled.div({
+const Backdrop = styled(motion.div)({
   width: '100%',
   height: '100%',
   position: 'absolute',
-  background: 'rgba(0, 0, 0, 0.2)',
+  background: 'rgba(34, 70, 90, 0.5)',
+  backdropFilter: 'blur(2px)',
   top: 0,
   left: 0,
+  cursor: 'pointer',
 })
 
-const Box = styled.div(({ theme }) => ({
+const Box = styled(motion.div)(({ theme }) => ({
   width: '100%',
   height: 260,
   background: theme.colors.black[4],
@@ -109,8 +113,24 @@ export const Modal = ({
 }: Props): JSX.Element => {
   return (
     <Container>
-      <Backdrop />
-      <Box>
+      <Backdrop
+        onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
+      <Box
+        initial={{ opacity: 0, scale: 0.2 }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          transition: {
+            delay: 0.25,
+          },
+        }}
+        exit={{ opacity: 0, scale: 0 }}
+      >
         <motion.div animate="mount" initial="unmount" key={title}>
           <Spacer size={3}>
             <ModalTitle>
