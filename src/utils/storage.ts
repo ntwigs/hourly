@@ -4,6 +4,7 @@ export type Event = {
   rate: string
   cost: string
   selection: Item
+  hasInitialized: boolean
 }
 
 const localStorage = chrome.storage.local
