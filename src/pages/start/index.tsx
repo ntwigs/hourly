@@ -52,6 +52,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
 
   return [selection, setStorageSelection]
 }
+
 export const Start = (): JSX.Element | null => {
   const [selection, setSelection] = useSelection()
 
