@@ -9,7 +9,7 @@ interface Invertable {
 
 const ButtonContainer = styled(motion.button)<Invertable>(
   ({ theme, isInverted }) => ({
-    background: isInverted ? theme.colors.black[4] : theme.colors.blue[0],
+    background: isInverted ? 'transparent' : theme.colors.blue[0],
     borderRadius: theme.sizes[0],
     border: 'none',
     width: '100%',
@@ -44,7 +44,16 @@ export const Button = ({
   isInverted,
 }: Props): JSX.Element => {
   return (
-    <ButtonContainer onClick={onClick} isInverted={isInverted}>
+    <ButtonContainer
+      onClick={onClick}
+      isInverted={isInverted}
+      whileTap={{
+        scale: 0.95,
+      }}
+      whileHover={{
+        scale: 1.05,
+      }}
+    >
       <motion.div
         variants={rotate}
         initial="unmount"
