@@ -8,7 +8,7 @@ export const onboard: OnBoard[] = [
   {
     image: '',
     title: 'Welcome',
-    text: "I'll take you on a very *short journey* to make sure you know everything you need know in order to use *Hourly*.",
+    text: "I'll take you on a short trip around *Hourly-town*, so you'll know everything you need to get *started*!",
   },
   {
     image: '',
@@ -18,16 +18,16 @@ export const onboard: OnBoard[] = [
   {
     image: '',
     title: 'Hourly rate',
-    text: "First you'll have to enter your *hourly rate*. How much you'd *make per hour*.",
+    text: "First, you'll have to enter your *hourly rate*, how much you make per hour. Don't worry - *Hourly doesn't snoop*.",
   },
   {
     image: '',
     title: 'Beers?',
-    text: 'Then you should *select an item* that you would like to be *represented* on your Toggl page.',
+    text: "So you'd like to *show some beers* on your Toggl? I've got your back Jack! You just get right to it and click that *beer button*.",
   },
   {
     image: '',
     title: 'Dough',
-    text: 'Does the *price* not add up to the actual item your saving for? *Change it*!',
+    text: 'Whoa! That *cookie* is way more *expensive* than the one you want. Good news! The price is *customizable*.',
   },
 ]
