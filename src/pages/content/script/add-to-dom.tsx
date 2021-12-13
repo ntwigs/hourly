@@ -40,6 +40,17 @@ interface ExistingRoot {
 const getHasExistingRoot = ({ element }: ExistingRoot) => {
   return !element || element.classList.value === HOURLY_ROOT
 }
+
+interface SetDefaultTime {
+  node: Element
+}
+
+const setDefaultTime =
+  ({ node }: SetDefaultTime) =>
+  (): string => {
+    return node?.firstElementChild?.textContent || ''
+  }
+
 interface AddToTasks extends Node, Selectors {}
 
 export const addToDom = ({ node, selector }: AddToTasks): void => {
@@ -59,12 +70,14 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
 
     parent.insertAdjacentElement('beforebegin', root)
 
+    const getDefaultTime = setDefaultTime({ node: element.parentElement })
+
     ReactDOM.render(
       <React.StrictMode>
         <Intersect>
           <ThemeProvider theme={theme}>
             <Content
-              defaultTime={element.textContent || ''}
+              getDefaultTime={getDefaultTime}
               timeObserver={timeObserver}
               isTimer={selector === 'timer'}
             />

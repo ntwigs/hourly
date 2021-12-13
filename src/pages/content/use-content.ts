@@ -7,14 +7,14 @@ import { items as defaultItems } from '@data/items'
 
 export interface Props {
   timeObserver: (fn: MutationCallback) => MutationObserver
-  defaultTime?: string
+  getDefaultTime: () => string
   isTimer?: boolean
 }
 
 export const useContent = ({
   timeObserver,
-  defaultTime = '',
-}: Pick<Props, 'timeObserver' | 'defaultTime'>) => {
+  getDefaultTime,
+}: Pick<Props, 'timeObserver' | 'getDefaultTime'>) => {
   const [rate, setRate] = useStorageState<Event['rate']>({
     selector: 'rate',
     defaultValue: '100',
@@ -28,7 +28,7 @@ export const useContent = ({
     defaultValue: defaultItems[0],
   })
 
-  const time = useTimeObserver({ defaultTime, timeObserver })
+  const time = useTimeObserver({ getDefaultTime, timeObserver })
   const { items, percentage } = useAmount({ time, rate, cost })
 
   useOnMessage({ item, setItem, setRate, setCost })

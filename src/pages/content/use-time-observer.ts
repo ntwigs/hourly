@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { useMount } from '@hooks/use-mount'
 
 interface UseTimeObserver {
-  defaultTime: string
+  getDefaultTime: () => string
   timeObserver: (callback: MutationCallback) => MutationObserver
 }
 
 export const useTimeObserver = ({
-  defaultTime,
+  getDefaultTime,
   timeObserver,
 }: UseTimeObserver): string => {
+  const defaultTime = getDefaultTime()
   const [time, setTime] = useState<string>(defaultTime)
 
   useMount(() => {
@@ -18,6 +19,7 @@ export const useTimeObserver = ({
 
       const nodes = mutation.addedNodes
       const [time] = Array.from(nodes)
+
       if (time.textContent) {
         setTime(time.textContent!)
       }

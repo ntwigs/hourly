@@ -13,10 +13,13 @@ const VerticalCenter = styled.div({
 
 export const Content = ({
   timeObserver,
-  defaultTime = '',
+  getDefaultTime,
   isTimer,
 }: Props): JSX.Element | null => {
-  const { items, percentage, item } = useContent({ timeObserver, defaultTime })
+  const { items, percentage, item } = useContent({
+    timeObserver,
+    getDefaultTime,
+  })
 
   if (!item) {
     return null
