@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { motion, Variants } from 'framer-motion'
 
 interface Props {
-  image: string
+  component?: () => JSX.Element | null
   title: string
   text: string
   onNext?: MouseEventHandler<HTMLButtonElement>
@@ -45,7 +45,7 @@ const Backdrop = styled(motion.div)({
 
 const Box = styled(motion.div)(({ theme }) => ({
   width: '100%',
-  height: 260,
+  height: '100%',
   background: theme.colors.black[4],
   padding: theme.spacing[3],
   borderRadius: theme.sizes[0],
@@ -110,7 +110,10 @@ export const Modal = ({
   onClose,
   isFirst,
   isLast,
+  component,
 }: Props): JSX.Element => {
+  const Component = component
+
   return (
     <Container>
       <Backdrop
@@ -145,6 +148,7 @@ export const Modal = ({
             </motion.div>
           </Spacer>
         </motion.div>
+        {Component && <Component />}
         <Grow />
         <motion.div
           variants={buttonContainerVariants}

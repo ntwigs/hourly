@@ -4,6 +4,9 @@ import { useMount } from '@hooks/use-mount'
 import { storage } from '@utils/storage'
 import { AnimatePresence } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
+import { Cost } from './cost'
+import { Items } from './items'
+import { Rate } from './rate'
 
 const useRenderModal = (): [
   boolean | undefined,
@@ -30,6 +33,12 @@ const useRenderModal = (): [
   return [shouldRender, setShouldRender]
 }
 
+const components = {
+  rate: Rate,
+  cost: Cost,
+  items: Items,
+}
+
 export const Onboarding = () => {
   const [index, setIndex] = useState(0)
   const [shouldRender, setShouldRender] = useRenderModal()
@@ -37,14 +46,14 @@ export const Onboarding = () => {
   const onBack = useCallback(() => setIndex((index) => index - 1), [])
   const onClose = useCallback(() => setShouldRender(false), [setShouldRender])
 
-  const { image, text, title } = onboard[index]
+  const { component, text, title } = onboard[index]
 
   return (
     <AnimatePresence>
       {shouldRender && (
         <Modal
           title={title}
-          image={image}
+          component={component ? components[component] : undefined}
           text={text}
           onNext={onNext}
           onBack={onBack}
