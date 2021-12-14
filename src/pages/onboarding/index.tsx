@@ -1,4 +1,5 @@
 import { Modal } from '@components/modal'
+import { OnboardSlide } from '@components/onboard-slide'
 import { onboard } from '@data/onboard'
 import { useMount } from '@hooks/use-mount'
 import { storage } from '@utils/storage'
@@ -51,16 +52,18 @@ export const Onboarding = () => {
   return (
     <AnimatePresence>
       {shouldRender && (
-        <Modal
-          title={title}
-          component={component ? components[component] : undefined}
-          text={text}
-          onNext={onNext}
-          onBack={onBack}
-          onClose={onClose}
-          isFirst={index === 0}
-          isLast={index === onboard.length - 1}
-        />
+        <Modal>
+          <OnboardSlide
+            title={title}
+            component={component ? components[component] : undefined}
+            text={text}
+            onNext={onNext}
+            onBack={onBack}
+            onClose={onClose}
+            isFirst={index === 0}
+            isLast={index === onboard.length - 1}
+          />
+        </Modal>
       )}
     </AnimatePresence>
   )
