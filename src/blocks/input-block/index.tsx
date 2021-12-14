@@ -35,6 +35,7 @@ interface Props {
   store: keyof Event
   max?: number
   item?: Item
+  invertLabel?: boolean
 }
 
 const containerVariant: Variants = {
@@ -86,12 +87,25 @@ const useInput = (
 const isNumber = (number: unknown): number is number =>
   typeof +(number as string) === 'number'
 
+interface InvertableInputTitleProps {
+  isInverted?: boolean
+}
+
+const InvertableInputTitle = styled(InputTitle)<InvertableInputTitleProps>(
+  ({ theme, isInverted }) =>
+    isInverted && {
+      color: theme.colors.black[1],
+      fontWeight: theme.weight[1],
+    }
+)
+
 export const InputBlock = ({
   title,
   defaultValue,
   max,
   store,
   item,
+  invertLabel,
 }: Props): JSX.Element => {
   const [value, setValue] = useInput(store, defaultValue)
 
@@ -112,9 +126,9 @@ export const InputBlock = ({
     <Section>
       <Spacer size={3}>
         <Spacer as={motion.div} variants={containerVariant} size={2}>
-          <InputTitle>
+          <InvertableInputTitle isInverted={invertLabel}>
             <AnimatedText title={title} animation="slide" />
-          </InputTitle>
+          </InvertableInputTitle>
         </Spacer>
         <InputContainer variants={inputVariants}>
           <Input
