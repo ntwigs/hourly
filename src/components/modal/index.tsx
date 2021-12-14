@@ -132,7 +132,13 @@ export const Modal = ({
             delay: 0.25,
           },
         }}
-        exit={{ opacity: 0, scale: 0 }}
+        exit={{
+          opacity: 0,
+          scale: 0.5,
+          transition: {
+            stiffness: 10,
+          },
+        }}
       >
         <motion.div animate="mount" initial="unmount" key={title}>
           <Spacer size={3}>
