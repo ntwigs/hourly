@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ItemBlock } from '@blocks/item-block'
 import { Item, items } from '@data/items'
 import { storage } from '@utils/storage'
 import { useMount } from '@hooks/use-mount'
 import { useStorageEvent } from '@hooks/use-storage-event'
+import { useDispatch } from '@hooks/use-dispatch'
 
 const useSelection = (): [Item | undefined, (item: Item) => void] => {
   const [selection, setSelection] = useState<Item | undefined>()
@@ -31,15 +32,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
 export const Items = (): JSX.Element | null => {
   const [selection, setSelection] = useSelection()
 
-  useEffect(() => {
-    chrome.tabs.query({}, (tabs) => {
-      tabs.forEach((tab) => {
-        if (tab.id) {
-          chrome.tabs.sendMessage(tab.id, { selection })
-        }
-      })
-    })
-  }, [selection])
+  useDispatch({ storageKey: 'selection', value: selection })
 
   if (!selection) {
     return null

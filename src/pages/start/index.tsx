@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { HeaderBlock } from '@blocks/header-block'
 import { InputBlock } from '@blocks/input-block'
 import { ItemBlock } from '@blocks/item-block'
@@ -9,6 +9,7 @@ import { Circle } from '@components/circle'
 import { Item, items } from '@data/items'
 import { storage } from '@utils/storage'
 import { useMount } from '@hooks/use-mount'
+import { useDispatch } from '@hooks/use-dispatch'
 
 const DEFAULT_HOURLY_RATE = '100'
 
@@ -56,15 +57,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
 export const Start = (): JSX.Element | null => {
   const [selection, setSelection] = useSelection()
 
-  useEffect(() => {
-    chrome.tabs.query({}, (tabs) => {
-      tabs.forEach((tab) => {
-        if (tab.id) {
-          chrome.tabs.sendMessage(tab.id, { selection })
-        }
-      })
-    })
-  }, [selection])
+  useDispatch({ storageKey: 'selection', value: selection })
 
   if (!selection) {
     return null
