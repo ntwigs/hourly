@@ -13,10 +13,21 @@ const variants: Variants = {
   mount: {
     opacity: 1,
     y: 0,
+    transition: {
+      delay: 0.25,
+    },
   },
   unmount: {
     opacity: 0,
     y: 5,
+  },
+}
+
+const componentVariants: Variants = {
+  mount: {
+    transition: {
+      delayChildren: 0.5,
+    },
   },
 }
 
@@ -81,7 +92,14 @@ export const OnboardSlide = ({
         </motion.div>
       </motion.div>
       <Grow />
-      {component && component({})}
+      <motion.div
+        key={`${title}-component`}
+        initial="unmount"
+        animate="mount"
+        variants={componentVariants}
+      >
+        {component && component({})}
+      </motion.div>
       <Grow />
       <motion.div variants={buttonContainerVariants}>
         <Row>
