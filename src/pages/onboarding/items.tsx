@@ -21,7 +21,6 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
   useStorageEvent({ selection: 'selection', setSelection })
 
   const setStorageSelection = (selection: Item) => {
-    setSelection(selection)
     storage.set({ selection })
     storage.set({ cost: `${selection.price}` })
   }

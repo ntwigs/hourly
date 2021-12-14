@@ -64,7 +64,6 @@ const useInput = (
   const [input, setInput] = useState<string>()
 
   const setStorageInput = (value: string) => {
-    setInput(value)
     storage.set({ [store]: value })
   }
 
