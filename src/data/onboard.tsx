@@ -21,11 +21,11 @@ export const onboard: OnBoard[] = [
   {
     component: 'items',
     title: 'Beers?',
-    text: "So you'd like to *show some beers* on your Toggl? I've got your back Jack! You get right to it and click that *beer button*.",
+    text: "So you'd like to *show some brewskies* on your Toggl? I've got your back Jack! You get right to it and click that *beer button*.",
   },
   {
     component: 'cost',
-    title: 'Dough',
-    text: 'Whoa! That *cookie* is way more *expensive* than the one you want. Good news! The price is *customizable*.',
+    title: 'Pricing',
+    text: "Whoa! That's way more *expensive* than the one you want. Good news! The price is *customizable*.",
   },
 ]
