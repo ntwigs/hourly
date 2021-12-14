@@ -6,16 +6,12 @@ import { useMount } from '@hooks/use-mount'
 import { useStorageEvent } from '@hooks/use-storage-event'
 import { useDispatch } from '@hooks/use-dispatch'
 
-const useSelection = (): [Item | undefined] => {
+const useSelection = (): Item | undefined => {
   const [selection, setSelection] = useState<Item | undefined>()
 
   useMount(() => {
     storage.get('selection').then(({ selection }) => {
-      if (selection) {
-        setSelection(selection)
-      } else {
-        setStorageSelection(items[0])
-      }
+      selection ? setSelection(selection) : setStorageSelection(items[0])
     })
   })
 
@@ -25,29 +21,29 @@ const useSelection = (): [Item | undefined] => {
     storage.set({ selection })
   }
 
-  return [selection]
+  return selection
 }
 
 interface Props {
   invertLabel?: boolean
+  selection: Item
 }
 
-export const Cost = ({ invertLabel = true }: Props): JSX.Element | null => {
-  const [selection] = useSelection()
+export const Cost = ({
+  invertLabel = true,
+  selection: _selection,
+}: Props): JSX.Element | null => {
+  const selection = useSelection()
 
   useDispatch({ storageKey: 'selection', value: selection })
-
-  if (!selection) {
-    return null
-  }
 
   return (
     <InputBlock
       invertLabel={invertLabel}
       item={selection}
       store="cost"
-      title={`Price per ${selection.name}`}
-      defaultValue={`${selection.price}`}
+      title={`Price per ${selection?.name || _selection.name}`}
+      defaultValue={`${selection?.price || _selection.price}`}
       max={6}
     />
   )

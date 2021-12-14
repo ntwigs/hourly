@@ -63,7 +63,7 @@ export const ItemBlock = ({
         <motion.div key={name} variants={itemVariants}>
           <motion.div variants={itemVariants} whileHover="hover" whileTap="tap">
             <Item
-              isSelected={selection.name === name}
+              isSelected={selection?.name === name}
               onClick={selectItem({ name, price })}
               color={getColor({ color: getColorIndex({ index }) })}
             >

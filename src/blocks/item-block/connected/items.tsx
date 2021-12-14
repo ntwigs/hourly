@@ -11,11 +11,7 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
 
   useMount(() => {
     storage.get('selection').then(({ selection }) => {
-      if (selection) {
-        setSelection(selection)
-      } else {
-        setStorageSelection(items[0])
-      }
+      selection ? setSelection(selection) : setStorageSelection(items[0])
     })
   })
 
@@ -29,16 +25,20 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
   return [selection, setStorageSelection]
 }
 
-export const Items = (): JSX.Element | null => {
+interface Props {
+  selection: Item
+}
+
+export const Items = ({ selection: _selection }: Props): JSX.Element | null => {
   const [selection, setSelection] = useSelection()
 
   useDispatch({ storageKey: 'selection', value: selection })
 
-  if (!selection) {
-    return null
-  }
-
   return (
-    <ItemBlock items={items} selection={selection} onClick={setSelection} />
+    <ItemBlock
+      items={items}
+      selection={selection || _selection}
+      onClick={setSelection}
+    />
   )
 }

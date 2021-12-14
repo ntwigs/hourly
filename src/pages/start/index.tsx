@@ -60,9 +60,9 @@ export const Start = (): JSX.Element | null => {
       <Circle variants={circleVariants} />
       <HeaderBlock title="Hourly" />
       <Rate invertLabel={false} />
-      <Cost invertLabel={false} />
+      <Cost selection={selection} invertLabel={false} />
       <Spacer size={4} />
-      <Items />
+      <Items selection={selection} />
     </Layout>
   )
 }

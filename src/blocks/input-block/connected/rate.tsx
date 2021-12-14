@@ -6,14 +6,12 @@ interface Props {
   invertLabel?: boolean
 }
 
-export const Rate = ({ invertLabel = true }: Props): JSX.Element => {
-  return (
-    <InputBlock
-      invertLabel={invertLabel}
-      store="rate"
-      max={6}
-      title="Rate per hour"
-      defaultValue={DEFAULT_HOURLY_RATE}
-    />
-  )
-}
+export const Rate = ({ invertLabel = true }: Props): JSX.Element => (
+  <InputBlock
+    invertLabel={invertLabel}
+    store="rate"
+    max={6}
+    title="Rate per hour"
+    defaultValue={DEFAULT_HOURLY_RATE}
+  />
+)

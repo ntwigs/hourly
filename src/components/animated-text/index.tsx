@@ -50,6 +50,7 @@ const animations: Record<Animation['animation'], Variants> = {
 
 export const AnimatedText = ({ title, animation = 'rotate' }: Props) => {
   const letters = title.split('')
+  console.log(title)
 
   return (
     <>
