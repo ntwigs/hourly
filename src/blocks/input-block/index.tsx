@@ -11,6 +11,7 @@ import { Event, storage } from '@utils/storage'
 import { useDispatch } from '@hooks/use-dispatch'
 import { useDidUpdate } from '@hooks/use-did-update'
 import { useMount } from '@hooks/use-mount'
+import { useStorageEvent } from '@hooks/use-storage-event'
 
 const Symbol = styled(InputValue)(({ theme }) => ({
   position: 'absolute',
@@ -65,6 +66,8 @@ const useInput = (
     setInput(value)
     storage.set({ [store]: value })
   }
+
+  useStorageEvent({ selection: store, setSelection: setInput })
 
   useMount(() => {
     storage.get(store).then((input) => {
