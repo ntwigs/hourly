@@ -1,17 +1,15 @@
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import { HeaderBlock } from '@blocks/header-block'
-import { InputBlock } from '@blocks/input-block'
-import { ItemBlock } from '@blocks/item-block'
 import { Layout } from '@components/layout'
 import { Spacer } from '@components/spacer'
 import { Circle } from '@components/circle'
 import { Item, items } from '@data/items'
 import { storage } from '@utils/storage'
 import { useMount } from '@hooks/use-mount'
-import { useDispatch } from '@hooks/use-dispatch'
-
-const DEFAULT_HOURLY_RATE = '100'
+import { Rate } from '@pages/onboarding/rate'
+import { Cost } from '@pages/onboarding/cost'
+import { Items } from '@pages/onboarding/items'
 
 const variants: Variants = {
   mount: {
@@ -33,31 +31,20 @@ const circleVariants = {
   },
 }
 
-const useSelection = (): [Item | undefined, (item: Item) => void] => {
+const useSelection = (): Item | undefined => {
   const [selection, setSelection] = useState<Item | undefined>()
 
   useMount(() => {
     storage.get('selection').then(({ selection }) => {
-      if (selection) {
-        setSelection(selection)
-      } else {
-        setStorageSelection(items[0])
-      }
+      selection ? setSelection(selection) : setSelection(items[0])
     })
   })
 
-  const setStorageSelection = (selection: Item) => {
-    setSelection(selection)
-    storage.set({ selection })
-  }
-
-  return [selection, setStorageSelection]
+  return selection
 }
 
 export const Start = (): JSX.Element | null => {
-  const [selection, setSelection] = useSelection()
-
-  useDispatch({ storageKey: 'selection', value: selection })
+  const selection = useSelection()
 
   if (!selection) {
     return null
@@ -72,21 +59,10 @@ export const Start = (): JSX.Element | null => {
     >
       <Circle variants={circleVariants} />
       <HeaderBlock title="Hourly" />
-      <InputBlock
-        store="rate"
-        max={6}
-        title="Rate per hour"
-        defaultValue={DEFAULT_HOURLY_RATE}
-      />
-      <InputBlock
-        item={selection}
-        store="cost"
-        title={`Price per ${selection.name}`}
-        defaultValue={`${selection.price}`}
-        max={6}
-      />
+      <Rate invertLabel={false} />
+      <Cost invertLabel={false} />
       <Spacer size={4} />
-      <ItemBlock items={items} selection={selection} onClick={setSelection} />
+      <Items />
     </Layout>
   )
 }

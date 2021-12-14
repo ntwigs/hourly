@@ -46,7 +46,7 @@ const Container = styled(motion.div)({
 })
 
 interface Props {
-  component?: () => JSX.Element | null
+  component?: CallableFunction | null
   title: string
   text: string
   onNext?: MouseEventHandler<HTMLButtonElement>
@@ -81,7 +81,7 @@ export const OnboardSlide = ({
         </motion.div>
       </motion.div>
       <Grow />
-      {component && component()}
+      {component && component({})}
       <Grow />
       <motion.div variants={buttonContainerVariants}>
         <Row>

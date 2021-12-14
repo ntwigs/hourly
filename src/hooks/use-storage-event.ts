@@ -12,8 +12,9 @@ export const useStorageEvent = ({
 }: UseStorageEvent): void => {
   useMount(() => {
     chrome.storage.onChanged.addListener((event) => {
-      if (event[selection] && event[selection].newValue) {
-        setSelection(event[selection].newValue)
+      if (event[selection] && event[selection].newValue !== undefined) {
+        const value = event[selection].newValue
+        setSelection(value)
       }
     })
   })

@@ -28,7 +28,11 @@ const useSelection = (): [Item | undefined] => {
   return [selection]
 }
 
-export const Cost = (): JSX.Element | null => {
+interface Props {
+  invertLabel?: boolean
+}
+
+export const Cost = ({ invertLabel = true }: Props): JSX.Element | null => {
   const [selection] = useSelection()
 
   useDispatch({ storageKey: 'selection', value: selection })
@@ -39,7 +43,7 @@ export const Cost = (): JSX.Element | null => {
 
   return (
     <InputBlock
-      invertLabel
+      invertLabel={invertLabel}
       item={selection}
       store="cost"
       title={`Price per ${selection.name}`}

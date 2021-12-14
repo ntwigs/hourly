@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { storage, Event } from '@utils/storage'
 import { useMount } from './use-mount'
+import { useStorageEvent } from './use-storage-event'
 
 interface UseStorageState<T> {
   selector: keyof Event
@@ -19,10 +20,16 @@ export const useStorageState = <T extends {}>({
       if (selectedValue) {
         setValue(selectedValue)
       } else {
-        setValue(defaultValue)
+        setStorageValue(defaultValue)
       }
     })
   })
+
+  useStorageEvent({ selection: selector, setSelection: setValue })
+
+  const setStorageValue = (value: T) => {
+    storage.set({ [selector]: value })
+  }
 
   return [value as T, setValue]
 }

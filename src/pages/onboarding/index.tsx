@@ -55,7 +55,7 @@ export const Onboarding = () => {
         <Modal>
           <OnboardSlide
             title={title}
-            component={component ? components[component] : undefined}
+            component={component ? components[component] : null}
             text={text}
             onNext={onNext}
             onBack={onBack}
