@@ -140,15 +140,20 @@ export const Modal = ({
               <AnimatedText title={title} />
             </ModalTitle>
           </Spacer>
-          <Spacer size={3}>
-            <motion.div variants={variants}>
-              <ModalText>
-                <WithBold text={text} />
-              </ModalText>
-            </motion.div>
-          </Spacer>
+          <motion.div variants={variants}>
+            <ModalText>
+              <WithBold text={text} />
+            </ModalText>
+          </motion.div>
         </motion.div>
-        {Component && <Component />}
+        <Grow />
+        <motion.div
+          variants={buttonContainerVariants}
+          initial="unmount"
+          animate="mount"
+        >
+          {Component && <Component />}
+        </motion.div>
         <Grow />
         <motion.div
           variants={buttonContainerVariants}

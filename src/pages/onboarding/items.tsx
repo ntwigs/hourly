@@ -3,6 +3,7 @@ import { ItemBlock } from '@blocks/item-block'
 import { Item, items } from '@data/items'
 import { storage } from '@utils/storage'
 import { useMount } from '@hooks/use-mount'
+import { useStorageEvent } from '@hooks/use-storage-event'
 
 const useSelection = (): [Item | undefined, (item: Item) => void] => {
   const [selection, setSelection] = useState<Item | undefined>()
@@ -17,9 +18,12 @@ const useSelection = (): [Item | undefined, (item: Item) => void] => {
     })
   })
 
+  useStorageEvent({ selection: 'selection', setSelection })
+
   const setStorageSelection = (selection: Item) => {
     setSelection(selection)
     storage.set({ selection })
+    storage.set({ cost: `${selection.price}` })
   }
 
   return [selection, setStorageSelection]
