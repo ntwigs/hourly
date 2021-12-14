@@ -7,9 +7,9 @@ import { Circle } from '@components/circle'
 import { Item, items } from '@data/items'
 import { storage } from '@utils/storage'
 import { useMount } from '@hooks/use-mount'
-import { Rate } from '@pages/onboarding/rate'
-import { Cost } from '@pages/onboarding/cost'
-import { Items } from '@pages/onboarding/items'
+import { Cost } from '@blocks/input-block/connected/cost'
+import { Rate } from '@blocks/input-block/connected/rate'
+import { Items } from '@blocks/item-block/connected/items'
 
 const variants: Variants = {
   mount: {

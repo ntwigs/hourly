@@ -5,9 +5,9 @@ import { useMount } from '@hooks/use-mount'
 import { storage } from '@utils/storage'
 import { AnimatePresence } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
-import { Cost } from './cost'
-import { Items } from './items'
-import { Rate } from './rate'
+import { Cost } from '@blocks/input-block/connected/cost'
+import { Rate } from '@blocks/input-block/connected/rate'
+import { Items } from '@blocks/item-block/connected/items'
 
 const useRenderModal = (): [
   boolean | undefined,
