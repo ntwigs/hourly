@@ -5,7 +5,7 @@ const colors = {
   red: ['#FFAAA7'],
   yellow: ['#FFD3B4'],
   green: ['#D5ECC2'],
-  blue: ['#98DDCA'],
+  blue: ['#98DDCA', 'rgba(34, 70, 90, 0.5)'],
 }
 const weight = [400, 700, 900]
 const fonts = {

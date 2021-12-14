@@ -1,6 +1,7 @@
 import { MouseEventHandler, ReactNode } from 'react'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
+import { Backdrop, variants as backdropVariants } from '@components/backdrop'
 
 interface Props {
   onBackdropClick?: () => void | MouseEventHandler<HTMLButtonElement>
@@ -21,17 +22,6 @@ const Container = styled(motion.main)({
   padding: 16,
 })
 
-const Backdrop = styled(motion.div)({
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-  background: 'rgba(34, 70, 90, 0.5)',
-  backdropFilter: 'blur(2px)',
-  top: 0,
-  left: 0,
-  cursor: 'pointer',
-})
-
 const Box = styled(motion.div)(({ theme }) => ({
   width: '100%',
   height: '100%',
@@ -43,35 +33,33 @@ const Box = styled(motion.div)(({ theme }) => ({
   flexDirection: 'column',
 }))
 
+const boxVariants: Variants = {
+  mount: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      delay: 0.25,
+    },
+  },
+  unmount: {
+    opacity: 0,
+    scale: 0.2,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.5,
+    transition: {
+      stiffness: 10,
+    },
+  },
+}
+
 export const Modal = ({ onBackdropClick, children }: Props): JSX.Element => {
   return (
-    <Container>
-      <Backdrop
-        onClick={onBackdropClick}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      />
-      <Box
-        initial={{ opacity: 0, scale: 0.2 }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          transition: {
-            delay: 0.25,
-          },
-        }}
-        exit={{
-          opacity: 0,
-          scale: 0.5,
-          transition: {
-            stiffness: 10,
-          },
-        }}
-      >
-        {children}
-      </Box>
+    <Container initial="unmount" animate="mount" exit="exit">
+      <Backdrop variants={backdropVariants} onClick={onBackdropClick} />
+      <Box variants={boxVariants}>{children}</Box>
     </Container>
   )
 }

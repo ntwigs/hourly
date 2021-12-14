@@ -5,19 +5,14 @@ import { AnimatedText } from '@components/animated-text'
 import { Button } from '@components/button'
 import { Row } from '@components/row'
 import { MouseEventHandler } from 'react'
+import { Parser } from '@components/parser'
+import { Grow } from '@components/grow'
 import styled from 'styled-components'
-
-const Grow = styled.div({
-  flexGrow: 1,
-})
 
 const variants: Variants = {
   mount: {
     opacity: 1,
     y: 0,
-    transition: {
-      delay: 0.25,
-    },
   },
   unmount: {
     opacity: 0,
@@ -25,39 +20,30 @@ const variants: Variants = {
   },
 }
 
-const Strong = styled.span(({ theme }) => ({
-  fontWeight: theme.weight[1],
-}))
-
-interface WithBoldProps {
-  text: string
-}
-
-const WithBold = ({ text }: WithBoldProps): JSX.Element => {
-  const textSplitByBold = text.split('*')
-  return (
-    <>
-      {textSplitByBold.map((section, index) => {
-        const isBold = index % 2
-        return isBold ? <Strong>{section}</Strong> : section
-      })}
-    </>
-  )
-}
-
 const buttonContainerVariants: Variants = {
   mount: {
     opacity: 1,
     y: 0,
-    transition: {
-      delay: 0.5,
-    },
   },
   unmount: {
     opacity: 0,
     y: 10,
   },
 }
+
+const containerVariant: Variants = {
+  mount: {
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+}
+
+const Container = styled(motion.div)({
+  display: 'flex',
+  flexDirection: 'column',
+  flexGrow: 1,
+})
 
 interface Props {
   component?: () => JSX.Element | null
@@ -81,8 +67,8 @@ export const OnboardSlide = ({
   component,
 }: Props) => {
   return (
-    <>
-      <motion.div animate="mount" initial="unmount" key={title}>
+    <Container variants={containerVariant} initial="unmount" animate="mount">
+      <motion.div key={title} initial="unmount" animate="mount">
         <Spacer size={3}>
           <ModalTitle>
             <AnimatedText title={title} />
@@ -90,24 +76,14 @@ export const OnboardSlide = ({
         </Spacer>
         <motion.div variants={variants}>
           <ModalText>
-            <WithBold text={text} />
+            <Parser text={text} />
           </ModalText>
         </motion.div>
       </motion.div>
       <Grow />
-      <motion.div
-        variants={buttonContainerVariants}
-        initial="unmount"
-        animate="mount"
-      >
-        {component && component()}
-      </motion.div>
+      {component && component()}
       <Grow />
-      <motion.div
-        variants={buttonContainerVariants}
-        initial="unmount"
-        animate="mount"
-      >
+      <motion.div variants={buttonContainerVariants}>
         <Row>
           <Button isInverted onClick={isFirst ? onClose : onBack}>
             {isFirst ? 'skip' : 'back'}
@@ -117,6 +93,6 @@ export const OnboardSlide = ({
           </Button>
         </Row>
       </motion.div>
-    </>
+    </Container>
   )
 }
