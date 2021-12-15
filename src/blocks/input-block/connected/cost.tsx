@@ -6,7 +6,11 @@ import { useMount } from '@hooks/use-mount'
 import { useStorageEvent } from '@hooks/use-storage-event'
 import { useDispatch } from '@hooks/use-dispatch'
 
-const useSelection = (): Item | undefined => {
+interface UseSelectionProps {
+  parentSelection?: Item
+}
+
+const useSelection = ({ parentSelection }: UseSelectionProps): Item | undefined => {
   const [selection, setSelection] = useState<Item | undefined>()
 
   useMount(() => {
@@ -21,7 +25,7 @@ const useSelection = (): Item | undefined => {
     storage.set({ selection })
   }
 
-  return selection
+  return parentSelection ? parentSelection : selection
 }
 
 interface Props {
@@ -33,7 +37,7 @@ export const Cost = ({
   invertLabel = true,
   selection: _selection,
 }: Props): JSX.Element | null => {
-  const selection = useSelection()
+  const selection = useSelection({parentSelection: _selection})
 
   useDispatch({ storageKey: 'selection', value: selection })
 
@@ -42,8 +46,8 @@ export const Cost = ({
       invertLabel={invertLabel}
       item={selection}
       store="cost"
-      title={`Price per ${selection?.name || _selection.name}`}
-      defaultValue={`${selection?.price || _selection.price}`}
+      title={`Price per ${selection?.name}`}
+      defaultValue={`${selection?.price}`}
       max={6}
     />
   )
