@@ -4,7 +4,7 @@
   "short_name": "Hourly",
   "name": "Hourly",
   "description": "Convert those Toggl entries into something fun - like burgers.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "icons": {
     "16": "16-icon.png",
     "32": "32-icon.png",
