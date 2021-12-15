@@ -15,15 +15,13 @@ const useSelection = ({ parentSelection }: UseSelectionProps): Item | undefined 
 
   useMount(() => {
     storage.get('selection').then(({ selection }) => {
-      selection ? setSelection(selection) : setStorageSelection(items[0])
+      if (selection) {
+        setSelection(selection)
+      }
     })
   })
 
   useStorageEvent({ selection: 'selection', setSelection })
-
-  const setStorageSelection = (selection: Item) => {
-    storage.set({ selection })
-  }
 
   return parentSelection ? parentSelection : selection
 }
