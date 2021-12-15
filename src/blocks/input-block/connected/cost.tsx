@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { InputBlock } from '@blocks/input-block'
-import { Item, items } from '@data/items'
+import { Item } from '@data/items'
 import { storage } from '@utils/storage'
 import { useMount } from '@hooks/use-mount'
 import { useStorageEvent } from '@hooks/use-storage-event'
@@ -10,7 +10,9 @@ interface UseSelectionProps {
   parentSelection?: Item
 }
 
-const useSelection = ({ parentSelection }: UseSelectionProps): Item | undefined => {
+const useSelection = ({
+  parentSelection,
+}: UseSelectionProps): Item | undefined => {
   const [selection, setSelection] = useState<Item | undefined>()
 
   useMount(() => {
@@ -35,7 +37,7 @@ export const Cost = ({
   invertLabel = true,
   selection: _selection,
 }: Props): JSX.Element | null => {
-  const selection = useSelection({parentSelection: _selection})
+  const selection = useSelection({ parentSelection: _selection })
 
   useDispatch({ storageKey: 'selection', value: selection })
 
