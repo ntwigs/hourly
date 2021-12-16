@@ -10,6 +10,7 @@ import { useMount } from '@hooks/use-mount'
 import { Cost } from '@blocks/input-block/connected/cost'
 import { Rate } from '@blocks/input-block/connected/rate'
 import { Items } from '@blocks/item-block/connected/items'
+import { useStorageEvent } from '@hooks/use-storage-event'
 
 const variants: Variants = {
   mount: {
@@ -39,6 +40,8 @@ const useSelection = (): Item | undefined => {
       selection ? setSelection(selection) : setSelection(items[0])
     })
   })
+
+  useStorageEvent({ selection: 'selection', setSelection })
 
   return selection
 }
