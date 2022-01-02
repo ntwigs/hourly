@@ -33,7 +33,7 @@ You'll end up with something that makes Toggl **a lot more** than just a site wh
 
 ## How do I use Hourly? ⌛
 
-We'll - the first thing that you'll have to know is the fact that Hourly currently only works with the Time Tracking software **Toggl**. The second thing you'll have to do is install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/let-it-snow/glbcjjncmcgmnjcnijnnakeeccdojipb). And yes - it's currently just supported at the Chrome Web Store. **One shop stop only**. Input your hourly rate, the item you'd like to track, and the price of that item. Just like this - and you should be ready to go!
+We'll - the first thing that you'll have to know is the fact that Hourly currently only works with the Time Tracking software **Toggl**. The second thing you'll have to do is install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/hourly/beakjccmjlmlnflidghcnkklaiaockdg). And yes - it's currently just supported at the Chrome Web Store. **One shop stop only**. Input your hourly rate, the item you'd like to track, and the price of that item. Just like this - and you should be ready to go!
 
 <table width="100%">
   <tr>
