@@ -15,18 +15,23 @@ interface Node extends Selectors {
 const config = {
   childList: true,
   subtree: true,
+  characterData: true
 }
 
 const HOURLY_ROOT = 'hourly-root'
 const DURATION_QUERY = '.time-format-utils__duration'
+const TOTAL_DURATION_QUERY = '.css-8iioa1-TotalTimeCounter'
 
-const getElements = ({ node }: Node): readonly Element[] => {
+const getElements = ({ node }: Pick<Node, 'node'>): readonly HTMLElement[] => {
   const durations = node.querySelectorAll(DURATION_QUERY)
-  return Array.from(durations)
+  const totalDurations = node.querySelectorAll(TOTAL_DURATION_QUERY)
+  const durationArray = Array.from(durations) as HTMLElement[]
+  const totalDurationsArray = Array.from(totalDurations) as HTMLElement[]
+  return [...durationArray, ...totalDurationsArray]
 }
 
 const observeTime =
-  ({ node }: Node) =>
+  ({ node }: Pick<Node, 'node'>) =>
   (fn: MutationCallback): MutationObserver => {
     const observer = new MutationObserver(fn)
     observer.observe(node, config)
@@ -54,7 +59,7 @@ const setDefaultTime =
 interface AddToTasks extends Node, Selectors {}
 
 export const addToDom = ({ node, selector }: AddToTasks): void => {
-  const elements = getElements({ node, selector })
+  const elements = getElements({ node })
 
   elements.forEach((element) => {
     const [parent, sibling] = getSibling({ selector, element })
@@ -63,7 +68,7 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
     const hasExistingRoot = getHasExistingRoot({ element: sibling })
     if (hasExistingRoot || !isElement(element.parentElement)) return
 
-    const timeObserver = observeTime({ node: element.parentElement, selector })
+    const timeObserver = observeTime({ node: element.parentElement })
 
     const root = document.createElement('div')
     root.className = HOURLY_ROOT
