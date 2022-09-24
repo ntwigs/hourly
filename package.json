@@ -1,6 +1,6 @@
 {
   "name": "hourly",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.0",
@@ -18,7 +18,7 @@
   "scripts": {
     "start": "craco start",
     "build": "react-scripts build",
-    "build:extension": "INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false craco build",
+    "build:extension": "cross-env INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -44,6 +44,7 @@
     "@types/chrome": "^0.0.162",
     "@types/styled-components": "^5.1.15",
     "craco-alias": "^3.0.1",
+    "cross-env": "^7.0.3",
     "html-webpack-plugin": "^5.5.0"
   }
 }
