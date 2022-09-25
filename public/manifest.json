@@ -25,9 +25,6 @@
       "run_at": "document_end"
     }
   ],
-  "background": {
-    "service_worker": "./static/js/background.js"
-  },
   "action": {
     "default_title": "Hourly",
     "default_popup": "index.html"

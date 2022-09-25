@@ -48,7 +48,6 @@ module.exports = {
             paths.appIndexJs,
           ].filter(Boolean),
           content: './src/pages/content/script/index.tsx',
-          background: './src/pages/content/script/background.ts',
         },
         output: {
           ...webpackConfig.output,
