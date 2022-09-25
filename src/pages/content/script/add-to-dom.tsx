@@ -7,6 +7,7 @@ import { getSibling } from './get-sibling'
 import { Selectors } from './selectors'
 import { isElement } from '@utils/is-element'
 import { Intersect } from '@components/intersect'
+import { setTimerPosition } from './set-timer-position'
 
 interface Node extends Selectors {
   node: Element
@@ -15,7 +16,7 @@ interface Node extends Selectors {
 const config = {
   childList: true,
   subtree: true,
-  characterData: true
+  characterData: true,
 }
 
 const HOURLY_ROOT = 'hourly-root'
@@ -72,7 +73,9 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
 
     const root = document.createElement('div')
     root.className = HOURLY_ROOT
-
+    if (element.classList.contains(TOTAL_DURATION_QUERY.slice(1))) {
+      setTimerPosition({ element: root })
+    }
     parent.insertAdjacentElement('beforebegin', root)
 
     const getDefaultTime = setDefaultTime({ node: element.parentElement })
