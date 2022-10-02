@@ -12,11 +12,13 @@
     "48": "48-icon.png",
     "128": "128-icon.png"
   },
-  "permissions": ["storage"],
-  "web_accessible_resources": [{ 
-    "resources": ["static/media/*.svg"],
-    "matches": ["<all_urls>"]
-  }],
+  "permissions": ["storage", "tabs"],
+  "web_accessible_resources": [
+    {
+      "resources": ["static/media/*.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["https://track.toggl.com/timer"],
@@ -28,5 +30,9 @@
   "action": {
     "default_title": "Hourly",
     "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "./static/js/background.js",
+    "type": "module"
   }
 }
