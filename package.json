@@ -1,6 +1,6 @@
 {
   "name": "hourly",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.0",

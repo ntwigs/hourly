@@ -5,7 +5,7 @@
   "name": "Hourly",
   "description": "Convert those Toggl entries into something fun - like burgers.",
   "homepage_url": "https://github.com/ntwigs/hourly",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "icons": {
     "16": "16-icon.png",
     "32": "32-icon.png",
