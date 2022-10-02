@@ -37,9 +37,8 @@ We'll - the first thing that you'll have to know is the fact that Hourly current
 
 <table width="100%">
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/14088342/145096637-a066ca6a-2917-4ab9-b81a-06d32c3c3e75.png"></td>
-    <td><img src="https://user-images.githubusercontent.com/14088342/145096686-5a25a491-0717-4274-b045-777008ed6a25.png"></td>
-    <td><img src="https://user-images.githubusercontent.com/14088342/145096721-e53cb663-0054-4171-bbb0-a62c752e0ad0.png"></td>
+    <td><img src="https://user-images.githubusercontent.com/14088342/193469599-080b2108-8029-440a-a468-b880cc53163f.gif"></td>
+    <td><img src="https://user-images.githubusercontent.com/14088342/193469612-67231423-d151-493b-8a4c-a94b1d3283cf.gif"></td>
   </tr>
  </table>
 
@@ -56,7 +55,7 @@ You can see the popup that is used for configuring Hourly above - it's that litt
 </table>
 <table width="100%">
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/14088342/145097410-4c821d24-4083-48dc-9b69-a769c5fa84bb.png"></td>
+    <td><img src="https://user-images.githubusercontent.com/14088342/193469887-9df98c17-321d-4c74-b75c-0af8be94bfbc.gif"></td>
   </tr>
 </table>
 
