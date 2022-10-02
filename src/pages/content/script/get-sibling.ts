@@ -17,6 +17,8 @@ interface GetSibling extends Selectors {
   element: HTMLElement
 }
 
+const dayListSelector = 'css-e7gbcr-innerControlStyles-DayListControls'
+
 export const getSibling = ({
   selector,
   element,
@@ -36,6 +38,10 @@ export const getSibling = ({
     if (hasClasses) {
       return getElements({ parent })
     }
+  }
+
+  if (element.parentElement?.classList.contains(dayListSelector)) {
+    return getElements({ parent: element })
   }
 
   return getElements({ parent: element.parentElement })

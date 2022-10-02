@@ -69,16 +69,24 @@ export const addToDom = ({ node, selector }: AddToTasks): void => {
     const hasExistingRoot = getHasExistingRoot({ element: sibling })
     if (hasExistingRoot || !isElement(element.parentElement)) return
 
-    const timeObserver = observeTime({ node: element.parentElement })
+    const result = element.parentElement.classList.contains(
+      'css-e7gbcr-innerControlStyles-DayListControls'
+    )
+
+    const timeObserver = result
+      ? observeTime({ node: element })
+      : observeTime({ node: element.parentElement })
 
     const root = document.createElement('div')
     root.className = HOURLY_ROOT
+
     if (element.classList.contains(TOTAL_DURATION_QUERY.slice(1))) {
       setTimerPosition({ element: root })
     }
+
     parent.insertAdjacentElement('beforebegin', root)
 
-    const getDefaultTime = setDefaultTime({ node: element.parentElement })
+    const getDefaultTime = result ? () => element.textContent || '' : setDefaultTime({ node: element.parentElement })
 
     ReactDOM.render(
       <React.StrictMode>
